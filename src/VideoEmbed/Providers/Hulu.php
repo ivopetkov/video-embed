@@ -9,12 +9,12 @@
 
 namespace IvoPetkov\VideoEmbed\Providers;
 
-class Vimeo extends \IvoPetkov\VideoEmbed\Provider
+class Hulu extends \IvoPetkov\VideoEmbed\Provider
 {
 
     static function load($url, $result)
     {
-        $response = file_get_contents('https://www.vimeo.com/api/oembed.json?url=' . urlencode($url));
+        $response = file_get_contents('http://hulu.com/api/oembed.json?url=' . urlencode($url));
         if (is_string($response)) {
             $result->rawResponse = $response;
             $data = json_decode($response, true);
@@ -25,9 +25,9 @@ class Vimeo extends \IvoPetkov\VideoEmbed\Provider
                 $result->duration = parent::getIntValueOrNull($data, 'duration');
                 $result->title = parent::getStringValueOrNull($data, 'title');
                 $result->description = parent::getStringValueOrNull($data, 'description');
-                $result->thumbnail['url'] = parent::getStringValueOrNull($data, 'thumbnail_url');
-                $result->thumbnail['width'] = parent::getIntValueOrNull($data, 'thumbnail_width');
-                $result->thumbnail['height'] = parent::getIntValueOrNull($data, 'thumbnail_height');
+                $result->thumbnail['url'] = parent::getStringValueOrNull($data, 'large_thumbnail_url');
+                $result->thumbnail['width'] = parent::getIntValueOrNull($data, 'large_thumbnail_width');
+                $result->thumbnail['height'] = parent::getIntValueOrNull($data, 'large_thumbnail_height');
                 $result->author['name'] = parent::getStringValueOrNull($data, 'author_name');
                 $result->author['url'] = parent::getStringValueOrNull($data, 'author_url');
                 $result->provider['name'] = parent::getStringValueOrNull($data, 'provider_name');

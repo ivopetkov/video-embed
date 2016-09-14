@@ -9,12 +9,12 @@
 
 namespace IvoPetkov\VideoEmbed\Providers;
 
-class Vimeo extends \IvoPetkov\VideoEmbed\Provider
+class Facebook extends \IvoPetkov\VideoEmbed\Provider
 {
 
     static function load($url, $result)
     {
-        $response = file_get_contents('https://www.vimeo.com/api/oembed.json?url=' . urlencode($url));
+        $response = file_get_contents('https://www.facebook.com/plugins/video/oembed.json/?url=' . urlencode($url));
         if (is_string($response)) {
             $result->rawResponse = $response;
             $data = json_decode($response, true);

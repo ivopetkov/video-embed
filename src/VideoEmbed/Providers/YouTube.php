@@ -14,7 +14,7 @@ class YouTube extends \IvoPetkov\VideoEmbed\Provider
 
     static function load($url, $result)
     {
-        $response = file_get_contents('http://www.youtube.com/oembed?url=' . urlencode($url) . '&format=json');
+        $response = file_get_contents('https://www.youtube.com/oembed?url=' . urlencode($url) . '&format=json');
         if (is_string($response)) {
             $result->rawResponse = $response;
             $data = json_decode($response, true);
