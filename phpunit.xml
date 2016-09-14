@@ -7,7 +7,7 @@
          beStrictAboutOutputDuringTests="true"
          stopOnFailure="true">
     <testsuites>
-        <testsuite name="Video embed Test Suite">
+        <testsuite>
             <directory>./tests/</directory>
         </testsuite>
     </testsuites>
