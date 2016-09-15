@@ -51,8 +51,8 @@ class VideoEmbed
     {
 
         // Converts PHP errors and warnings to Exceptions
-        set_error_handler(function($errorNumber, $errorMessage) {
-            throw new \Exception($errorMessage);
+        set_error_handler(function() {
+            throw new \Exception(func_get_arg(1));
         });
 
         try {
