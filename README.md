@@ -2,6 +2,8 @@
 
 Simple library that returns embed information for a given video url.
 
+Supported video services: CollegeHumor, Dailymotion, Facebook, Flickr, FunnyOrDie, Hulu, Kickstarter, NYTimes, OnAol, Ted, Ustream, Viddler, Vimeo, Vine, YouTube.
+
 [![Build Status](https://travis-ci.org/ivopetkov/video-embed.svg)](https://travis-ci.org/ivopetkov/video-embed)
 [![Latest Stable Version](https://poser.pugx.org/ivopetkov/video-embed/v/stable)](https://packagist.org/packages/ivopetkov/video-embed)
 [![codecov.io](https://codecov.io/github/ivopetkov/video-embed/coverage.svg?branch=master)](https://codecov.io/github/ivopetkov/video-embed?branch=master)
