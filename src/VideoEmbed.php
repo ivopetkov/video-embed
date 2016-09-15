@@ -35,6 +35,7 @@ class VideoEmbed
         'OnAol' => ['on.aol.com'],
         'Ted' => ['ted.com'],
         'Ustream' => ['ustream.com', '*.ustream.tv'],
+        'Vbox7' => ['vbox7.com', '*.vbox7.com'],
         'Viddler' => ['viddler.com'],
         'Vimeo' => ['vimeo.com', 'player.vimeo.com'],
         'Vine' => ['vine.co'],
@@ -91,8 +92,8 @@ class VideoEmbed
     {
         $this->html = preg_replace("/width([ ]?)=([ ]?)[\"\']([0-9]+)[\"\']/", "width=\"" . $width . "\"", $this->html);
         $this->html = preg_replace("/height([ ]?)=([ ]?)[\"\']([0-9]+)[\"\']/", "height=\"" . $height . "\"", $this->html);
-        $this->html = preg_replace("/width:([0-9]+)px/", "width:" . $width . "", $this->html);
-        $this->html = preg_replace("/height:([0-9]+)px/", "height:" . $height . "", $this->html);
+        $this->html = preg_replace("/width:([0-9]+)px/", "width:" . (is_numeric($width) ? $width . 'px' : '') . "", $this->html);
+        $this->html = preg_replace("/height:([0-9]+)px/", "height:" . (is_numeric($height) ? $height . 'px' : '') . "", $this->html);
         $this->html = preg_replace("/width([ ]?)=([ ]?)([0-9]+)/", "width=" . $width, $this->html);
         $this->html = preg_replace("/height([ ]?)=([ ]?)([0-9]+)/", "height=" . $height, $this->html);
         $this->width = $width;

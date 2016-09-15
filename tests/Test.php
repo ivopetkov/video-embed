@@ -124,6 +124,18 @@ class Test extends VideoEmbedTestCase
     /**
      * 
      */
+    public function testVbox7()
+    {
+        $videoEmbed = new IvoPetkov\VideoEmbed('http://www.vbox7.com/play:4bd8b90e');
+        $this->assertTrue($videoEmbed->url === 'http://www.vbox7.com/play:4bd8b90e');
+        $this->assertTrue($videoEmbed->title === 'David Guetta feat Kid Cudi - Memories ( Official Video )');
+        $videoEmbed->setSize(800, 600);
+        $this->assertTrue($videoEmbed->html === '<iframe src="https://www.vbox7.com/emb/external.php?vid=4bd8b90e" frameborder="0" allowfullscreen style="width:800px;height:600px;"></iframe>');
+    }
+
+    /**
+     * 
+     */
     public function testViddler()
     {
         
