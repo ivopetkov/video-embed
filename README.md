@@ -48,7 +48,115 @@ $videoEmbed = new IvoPetkov\VideoEmbed('https://www.youtube.com/watch?v=Pwe-pA6T
 //         )
 //     [rawResponse] => {"html": "\u003ciframe width=\"480\" height=\"270\" ...
 // )
+
+$videoEmbed->setSize(800, 600); // will set a new width and height in the video html code
 ```
+
+## Documentation
+
+### Classes
+
+#### IvoPetkov\VideoEmbed
+##### Properties
+
+`public string $url`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The video url
+
+`public string $html`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The video html code
+
+`public string|int $width`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The video width
+
+`public string|int $height`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The video height
+
+`public int $duration`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The video duration
+
+`public string $title`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The video title
+
+`public string $description`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The video description
+
+`public array $thumbnail`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An array containing an url and sizes for the video thumbnail image
+
+`public array $author`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An array containing the name and the url of the author
+
+`public array $provider`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An array containing the name and the url of the provider
+
+`public string $rawResponse`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The raw response from the provider embed endpoint
+
+##### Methods
+
+```php
+public __construct ( [ string $url ] )
+```
+
+Creates a new VideoEmbed object and load it if an url is specified
+
+_Parameters_
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`$url`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The video url
+
+_Returns_
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No value is returned.
+
+```php
+public void load ( string $url )
+```
+
+Loads the data for the url specified
+
+_Parameters_
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`$url`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The video url
+
+_Returns_
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No value is returned
+
+```php
+public void setSize ( string|int $width , string|int $height )
+```
+
+Sets new width and height in the video html code
+
+_Parameters_
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`$width`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thew new width
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`$height`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thew new height
+
+_Returns_
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No value is returned
+
 ## License
 Video Embed is open-sourced software. It's free to use under the MIT license. See the [license file](https://github.com/ivopetkov/video-embed/blob/master/LICENSE) for more information.
 
