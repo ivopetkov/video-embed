@@ -32,11 +32,9 @@ class VideoEmbed
         'Hulu' => ['hulu.com'],
         'Kickstarter' => ['kickstarter.com'],
         'NYTimes' => ['nytimes.com'],
-        'OnAol' => ['on.aol.com'],
         'Ted' => ['ted.com'],
-        'Ustream' => ['ustream.com', '*.ustream.tv'],
+        'Ustream' => ['ustream.com', 'ustream.tv', '*.ustream.tv'],
         'Vbox7' => ['vbox7.com', '*.vbox7.com'],
-        'Viddler' => ['viddler.com'],
         'Vimeo' => ['vimeo.com', 'player.vimeo.com'],
         'Vine' => ['vine.co'],
         'YouTube' => ['youtube.com', 'youtu.be']
@@ -56,6 +54,7 @@ class VideoEmbed
             throw new \Exception(func_get_arg(1));
         });
 
+        $errorReason = '';
         try {
             $urlData = parse_url($this->url);
             if (isset($urlData['host'])) {
@@ -79,23 +78,23 @@ class VideoEmbed
                 }
             }
         } catch (\Exception $e) {
-            
+            $errorReason = $e->getMessage();
         }
 
         restore_error_handler();
         if ($this->html === null) {
-            throw new \Exception('Cannot retrieve information about ' . $this->url);
+            throw new \Exception('Cannot retrieve information about ' . $this->url . ' (reason: ' . (isset($errorReason{0}) ? $errorReason : 'unknown') . ')');
         }
     }
 
     public function setSize($width, $height)
     {
-        $this->html = preg_replace("/width([ ]?)=([ ]?)[\"\']([0-9]+)[\"\']/", "width=\"" . $width . "\"", $this->html);
-        $this->html = preg_replace("/height([ ]?)=([ ]?)[\"\']([0-9]+)[\"\']/", "height=\"" . $height . "\"", $this->html);
-        $this->html = preg_replace("/width:([0-9]+)px/", "width:" . (is_numeric($width) ? $width . 'px' : '') . "", $this->html);
-        $this->html = preg_replace("/height:([0-9]+)px/", "height:" . (is_numeric($height) ? $height . 'px' : '') . "", $this->html);
-        $this->html = preg_replace("/width([ ]?)=([ ]?)([0-9]+)/", "width=" . $width, $this->html);
-        $this->html = preg_replace("/height([ ]?)=([ ]?)([0-9]+)/", "height=" . $height, $this->html);
+        $this->html = preg_replace("/ width([ ]?)=([ ]?)[\"\']([0-9\.]+)[\"\']/", " width=\"" . $width . "\"", $this->html);
+        $this->html = preg_replace("/ height([ ]?)=([ ]?)[\"\']([0-9\.]+)[\"\']/", " height=\"" . $height . "\"", $this->html);
+        $this->html = preg_replace("/width:([0-9\.]+)px/", "width:" . (is_numeric($width) ? $width . 'px' : '') . "", $this->html);
+        $this->html = preg_replace("/height:([0-9\.]+)px/", "height:" . (is_numeric($height) ? $height . 'px' : '') . "", $this->html);
+        $this->html = preg_replace("/ width([ ]?)=([ ]?)([0-9\.]+)/", " width=" . $width, $this->html);
+        $this->html = preg_replace("/ height([ ]?)=([ ]?)([0-9\.]+)/", " height=" . $height, $this->html);
         $this->width = $width;
         $this->height = $height;
         return $this->html;
