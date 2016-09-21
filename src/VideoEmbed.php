@@ -13,74 +13,86 @@ class VideoEmbed
 {
 
     /**
-     *
-     * @var string The video url
+     * The video url
+     * 
+     * @var string
      */
     public $url = null;
 
     /**
-     *
-     * @var string The video html code
+     * The video html code
+     * 
+     * @var string
      */
     public $html = null;
 
     /**
-     *
-     * @var string|int The video width
+     * The video width
+     * 
+     * @var string|int
      */
     public $width = null;
 
     /**
-     *
-     * @var string|int The video height
+     * The video height
+     * 
+     * @var string|int
      */
     public $height = null;
 
     /**
-     *
-     * @var int The video duration
+     * The video duration
+     * 
+     * @var int
      */
     public $duration = null;
 
     /**
-     *
-     * @var string The video title
+     * The video title
+     * 
+     * @var string
      */
     public $title = null;
 
     /**
-     *
-     * @var string The video description
+     * The video description
+     * 
+     * @var string
      */
     public $description = null;
 
     /**
-     *
-     * @var array An array containing an url and sizes for the video thumbnail image
+     * An array containing an url and sizes for the video thumbnail image
+     * 
+     * @var array
      */
     public $thumbnail = ['url' => null, 'width' => null, 'height' => null];
 
     /**
-     *
-     * @var array An array containing the name and the url of the author
+     * An array containing the name and the url of the author
+     * 
+     * @var array
      */
     public $author = ['name' => null, 'url' => null];
 
     /**
-     *
-     * @var array An array containing the name and the url of the provider
+     * An array containing the name and the url of the provider
+     * 
+     * @var array
      */
     public $provider = ['name' => null, 'url' => null];
 
     /**
-     *
-     * @var string The raw response from the provider embed endpoint
+     * The raw response from the provider embed endpoint
+     * 
+     * @var string
      */
     public $rawResponse = null;
 
     /**
+     * Providers list
      * 
-     * @var array Providers list
+     * @var array
      */
     static private $providers = [
         'CollegeHumor' => ['collegehumor.com'],
@@ -102,7 +114,7 @@ class VideoEmbed
     /**
      * Creates a new VideoEmbed object and load it if an url is specified
      * 
-     * @param string $url
+     * @param string $url The video url
      */
     public function __construct($url = null)
     {
