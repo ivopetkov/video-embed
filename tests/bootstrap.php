@@ -11,5 +11,5 @@ require __DIR__ . '/../vendor/autoload.php';
 
 class VideoEmbedTestCase extends PHPUnit_Framework_TestCase
 {
-
+    
 }
