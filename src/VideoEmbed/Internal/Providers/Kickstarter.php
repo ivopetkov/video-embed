@@ -7,14 +7,14 @@
  * Free to use under the MIT license.
  */
 
-namespace IvoPetkov\VideoEmbed\Providers;
+namespace IvoPetkov\VideoEmbed\Internal\Providers;
 
-class Flickr extends \IvoPetkov\VideoEmbed\Provider
+final class Kickstarter extends \IvoPetkov\VideoEmbed\Internal\Provider
 {
 
     static function load($url, $result)
     {
-        $response = parent::readUrl('http://www.flickr.com/services/oembed?url=' . urlencode($url) . '&format=json');
+        $response = parent::readUrl('http://www.kickstarter.com/services/oembed?url=' . urlencode($url) . '&format=json');
         $result->rawResponse = $response;
         $data = json_decode($response, true);
         if (is_array($data)) {

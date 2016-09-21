@@ -7,14 +7,14 @@
  * Free to use under the MIT license.
  */
 
-namespace IvoPetkov\VideoEmbed\Providers;
+namespace IvoPetkov\VideoEmbed\Internal\Providers;
 
-class FunnyOrDie extends \IvoPetkov\VideoEmbed\Provider
+final class Ustream extends \IvoPetkov\VideoEmbed\Internal\Provider
 {
 
     static function load($url, $result)
     {
-        $response = parent::readUrl('http://www.funnyordie.com/oembed.json?url=' . urlencode($url));
+        $response = parent::readUrl('http://www.ustream.tv/oembed?url=' . urlencode($url) . '&format=json');
         $result->rawResponse = $response;
         $data = json_decode($response, true);
         if (is_array($data)) {

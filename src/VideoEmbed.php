@@ -155,8 +155,8 @@ class VideoEmbed
                     $done = false;
                     foreach ($domains as $domain) {
                         if (preg_match('/^' . str_replace(['.', '*'], ['\.', '.*'], $domain) . '$/', $hostname)) {
-                            include_once __DIR__ . DIRECTORY_SEPARATOR . 'VideoEmbed' . DIRECTORY_SEPARATOR . 'Providers' . DIRECTORY_SEPARATOR . $name . '.php';
-                            call_user_func(['\IvoPetkov\VideoEmbed\Providers\\' . $name, 'load'], $this->url, $this);
+                            include_once __DIR__ . DIRECTORY_SEPARATOR . 'VideoEmbed' . DIRECTORY_SEPARATOR . 'Internal' . DIRECTORY_SEPARATOR . 'Providers' . DIRECTORY_SEPARATOR . $name . '.php';
+                            call_user_func(['\IvoPetkov\VideoEmbed\Internal\Providers\\' . $name, 'load'], $this->url, $this);
                             $done = true;
                             break;
                         }

@@ -7,14 +7,14 @@
  * Free to use under the MIT license.
  */
 
-namespace IvoPetkov\VideoEmbed\Providers;
+namespace IvoPetkov\VideoEmbed\Internal\Providers;
 
-class Ted extends \IvoPetkov\VideoEmbed\Provider
+final class CollegeHumor extends \IvoPetkov\VideoEmbed\Internal\Provider
 {
 
     static function load($url, $result)
     {
-        $response = parent::readUrl('http://www.ted.com/talks/oembed.json?url=' . urlencode($url));
+        $response = parent::readUrl('http://www.collegehumor.com/oembed.json?url=' . urlencode($url));
         $result->rawResponse = $response;
         $data = json_decode($response, true);
         if (is_array($data)) {

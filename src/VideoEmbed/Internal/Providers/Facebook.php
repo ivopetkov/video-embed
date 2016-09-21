@@ -7,9 +7,9 @@
  * Free to use under the MIT license.
  */
 
-namespace IvoPetkov\VideoEmbed\Providers;
+namespace IvoPetkov\VideoEmbed\Internal\Providers;
 
-class Facebook extends \IvoPetkov\VideoEmbed\Provider
+final class Facebook extends \IvoPetkov\VideoEmbed\Internal\Provider
 {
 
     static function load($url, $result)

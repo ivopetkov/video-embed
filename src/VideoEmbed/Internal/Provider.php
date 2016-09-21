@@ -7,7 +7,7 @@
  * Free to use under the MIT license.
  */
 
-namespace IvoPetkov\VideoEmbed;
+namespace IvoPetkov\VideoEmbed\Internal;
 
 class Provider
 {

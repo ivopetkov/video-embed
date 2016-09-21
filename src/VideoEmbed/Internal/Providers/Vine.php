@@ -7,14 +7,14 @@
  * Free to use under the MIT license.
  */
 
-namespace IvoPetkov\VideoEmbed\Providers;
+namespace IvoPetkov\VideoEmbed\Internal\Providers;
 
-class Vimeo extends \IvoPetkov\VideoEmbed\Provider
+final class Vine extends \IvoPetkov\VideoEmbed\Internal\Provider
 {
 
     static function load($url, $result)
     {
-        $response = parent::readUrl('https://www.vimeo.com/api/oembed.json?url=' . urlencode($url));
+        $response = parent::readUrl('https://vine.co/oembed.json?url=' . urlencode($url));
         $result->rawResponse = $response;
         $data = json_decode($response, true);
         if (is_array($data)) {

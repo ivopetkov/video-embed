@@ -7,14 +7,14 @@
  * Free to use under the MIT license.
  */
 
-namespace IvoPetkov\VideoEmbed\Providers;
+namespace IvoPetkov\VideoEmbed\Internal\Providers;
 
-class Hulu extends \IvoPetkov\VideoEmbed\Provider
+final class Flickr extends \IvoPetkov\VideoEmbed\Internal\Provider
 {
 
     static function load($url, $result)
     {
-        $response = parent::readUrl('http://hulu.com/api/oembed.json?url=' . urlencode($url));
+        $response = parent::readUrl('http://www.flickr.com/services/oembed?url=' . urlencode($url) . '&format=json');
         $result->rawResponse = $response;
         $data = json_decode($response, true);
         if (is_array($data)) {
@@ -24,9 +24,9 @@ class Hulu extends \IvoPetkov\VideoEmbed\Provider
             $result->duration = parent::getIntValueOrNull($data, 'duration');
             $result->title = parent::getStringValueOrNull($data, 'title');
             $result->description = parent::getStringValueOrNull($data, 'description');
-            $result->thumbnail['url'] = parent::getStringValueOrNull($data, 'large_thumbnail_url');
-            $result->thumbnail['width'] = parent::getIntValueOrNull($data, 'large_thumbnail_width');
-            $result->thumbnail['height'] = parent::getIntValueOrNull($data, 'large_thumbnail_height');
+            $result->thumbnail['url'] = parent::getStringValueOrNull($data, 'thumbnail_url');
+            $result->thumbnail['width'] = parent::getIntValueOrNull($data, 'thumbnail_width');
+            $result->thumbnail['height'] = parent::getIntValueOrNull($data, 'thumbnail_height');
             $result->author['name'] = parent::getStringValueOrNull($data, 'author_name');
             $result->author['url'] = parent::getStringValueOrNull($data, 'author_url');
             $result->provider['name'] = parent::getStringValueOrNull($data, 'provider_name');

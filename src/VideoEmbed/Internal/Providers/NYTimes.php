@@ -7,14 +7,14 @@
  * Free to use under the MIT license.
  */
 
-namespace IvoPetkov\VideoEmbed\Providers;
+namespace IvoPetkov\VideoEmbed\Internal\Providers;
 
-class Ustream extends \IvoPetkov\VideoEmbed\Provider
+final class NYTimes extends \IvoPetkov\VideoEmbed\Internal\Provider
 {
 
     static function load($url, $result)
     {
-        $response = parent::readUrl('http://www.ustream.tv/oembed?url=' . urlencode($url) . '&format=json');
+        $response = parent::readUrl('https://www.nytimes.com/svc/oembed/json/?url=' . urlencode($url));
         $result->rawResponse = $response;
         $data = json_decode($response, true);
         if (is_array($data)) {
