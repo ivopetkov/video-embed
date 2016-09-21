@@ -26,13 +26,13 @@ class VideoEmbed
 
     /**
      *
-     * @var v The video width
+     * @var string|int The video width
      */
     public $width = null;
 
     /**
      *
-     * @var int The video height
+     * @var string|int The video height
      */
     public $height = null;
 
@@ -167,12 +167,19 @@ class VideoEmbed
     /**
      * Sets new width and height in the video html code
      * 
-     * @param string $width Thew new width
-     * @param string $height Thew new height
+     * @param string|int $width Thew new width
+     * @param string|int $height Thew new height
+     * @throws \InvalidArgumentException
      * @return void No value is returned
      */
     public function setSize($width, $height)
     {
+        if (!is_string($width) && !is_int($width)) {
+            throw new \InvalidArgumentException('The width argument must be of type string or integer');
+        }
+        if (!is_string($height) && !is_int($height)) {
+            throw new \InvalidArgumentException('The height argument must be of type string or integer');
+        }
         $this->html = preg_replace("/ width([ ]?)=([ ]?)[\"\']([0-9\.]+)[\"\']/", " width=\"" . $width . "\"", $this->html);
         $this->html = preg_replace("/ height([ ]?)=([ ]?)[\"\']([0-9\.]+)[\"\']/", " height=\"" . $height . "\"", $this->html);
         $this->html = preg_replace("/width:([0-9\.]+)px/", "width:" . (is_numeric($width) ? $width . 'px' : '') . "", $this->html);
