@@ -12,18 +12,77 @@ namespace IvoPetkov;
 class VideoEmbed
 {
 
+    /**
+     *
+     * @var string The video url
+     */
     public $url = null;
+
+    /**
+     *
+     * @var string The video html code
+     */
     public $html = null;
+
+    /**
+     *
+     * @var v The video width
+     */
     public $width = null;
+
+    /**
+     *
+     * @var int The video height
+     */
     public $height = null;
+
+    /**
+     *
+     * @var int The video duration
+     */
     public $duration = null;
+
+    /**
+     *
+     * @var string The video title
+     */
     public $title = null;
+
+    /**
+     *
+     * @var string The video description
+     */
     public $description = null;
+
+    /**
+     *
+     * @var array An array containing an url and sizes for the video thumbnail image
+     */
     public $thumbnail = ['url' => null, 'width' => null, 'height' => null];
+
+    /**
+     *
+     * @var array An array containing the name and the url of the author
+     */
     public $author = ['name' => null, 'url' => null];
+
+    /**
+     *
+     * @var array An array containing the name and the url of the provider
+     */
     public $provider = ['name' => null, 'url' => null];
+
+    /**
+     *
+     * @var string The raw response from the provider embed endpoint
+     */
     public $rawResponse = null;
-    static public $providers = [
+
+    /**
+     * 
+     * @var array Providers list
+     */
+    static private $providers = [
         'CollegeHumor' => ['collegehumor.com'],
         'Dailymotion' => ['dailymotion.com'],
         'Facebook' => ['facebook.com'],
@@ -40,14 +99,32 @@ class VideoEmbed
         'YouTube' => ['youtube.com', 'youtu.be']
     ];
 
-    public function __construct($url)
+    /**
+     * Creates a new VideoEmbed object and load it if an url is specified
+     * 
+     * @param string $url
+     */
+    public function __construct($url = null)
     {
-        $this->url = $url;
-        $this->load();
+        if ($url !== null) {
+            $this->load($url);
+        }
     }
 
-    private function load()
+    /**
+     * Loads the data for the url specified
+     * 
+     * @param string $url The video url
+     * @throws \Exception
+     * @throws \InvalidArgumentException
+     * @return void No value is returned
+     */
+    public function load($url)
     {
+        if (!is_string($url)) {
+            throw new \InvalidArgumentException('The url argument must be of type string');
+        }
+        $this->url = $url;
 
         // Converts PHP errors and warnings to Exceptions
         set_error_handler(function() {
@@ -87,6 +164,13 @@ class VideoEmbed
         }
     }
 
+    /**
+     * Sets new width and height in the video html code
+     * 
+     * @param string $width Thew new width
+     * @param string $height Thew new height
+     * @return void No value is returned
+     */
     public function setSize($width, $height)
     {
         $this->html = preg_replace("/ width([ ]?)=([ ]?)[\"\']([0-9\.]+)[\"\']/", " width=\"" . $width . "\"", $this->html);
@@ -97,7 +181,6 @@ class VideoEmbed
         $this->html = preg_replace("/ height([ ]?)=([ ]?)([0-9\.]+)/", " height=" . $height, $this->html);
         $this->width = $width;
         $this->height = $height;
-        return $this->html;
     }
 
 }

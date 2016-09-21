@@ -197,7 +197,6 @@ class Test extends VideoEmbedTestCase
     public function testInvalidProvider2()
     {
         $this->setExpectedException('\Exception');
-        IvoPetkov\VideoEmbed::$providers[] = 'invalid';
         new IvoPetkov\VideoEmbed('http://invalid/');
     }
 
