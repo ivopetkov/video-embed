@@ -63,6 +63,10 @@ $videoEmbed->setSize(800, 600); // will set a new width and height in the video 
 ### Classes
 
 #### IvoPetkov\VideoEmbed
+##### Constants
+
+`const string VERSION`
+
 ##### Properties
 
 `public string $url`
