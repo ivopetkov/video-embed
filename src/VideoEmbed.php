@@ -15,7 +15,7 @@ class VideoEmbed
     /**
      * Current library version
      */
-    const VERSION = 'dev';
+    const VERSION = '0.1.0';
 
     /**
      * The video url
