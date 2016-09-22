@@ -10,11 +10,17 @@ Supported video services: CollegeHumor, Dailymotion, Facebook, Flickr, Funny Or 
 [![License](https://poser.pugx.org/ivopetkov/video-embed/license)](https://packagist.org/packages/ivopetkov/video-embed)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/5c6e4b99e3b4440692d5885c21730e8a)](https://www.codacy.com/app/ivo_2/video-embed)
 
-## Install via Composer
+## Download and install
+
+* Install via Composer
 
 ```shell
 composer require ivopetkov/video-embed
 ```
+
+* Download the zip file
+
+Download the [latest release](https://github.com/ivopetkov/video-embed/releases) from our GitHub page, unzip and include the `autoload.php` file.
 
 ## Usage
 
