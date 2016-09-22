@@ -7,9 +7,22 @@
  * Free to use under the MIT license.
  */
 
-require __DIR__ . '/../vendor/autoload.php';
-
 class VideoEmbedTestCase extends PHPUnit_Framework_TestCase
 {
-    
+
+    function setUp()
+    {
+        require __DIR__ . '/../vendor/autoload.php';
+    }
+
+}
+
+class VideoEmbedAutoloaderTestCase extends PHPUnit_Framework_TestCase
+{
+
+    function setUp()
+    {
+        require __DIR__ . '/../autoload.php';
+    }
+
 }

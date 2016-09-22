@@ -10,7 +10,7 @@
 /**
  * @runTestsInSeparateProcesses
  */
-class Test extends VideoEmbedTestCase
+class ProvidersTest extends VideoEmbedTestCase
 {
 
     /**
