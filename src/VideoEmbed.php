@@ -13,6 +13,11 @@ class VideoEmbed
 {
 
     /**
+     * Current library version
+     */
+    const VERSION = 'dev';
+
+    /**
      * The video url
      * 
      * @var string
