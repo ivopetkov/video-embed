@@ -184,11 +184,13 @@ class VideoEmbed {
                         $this->$key[ $val ] = $response->{'get' . ucfirst( $key ) . ucfirst( $val )}();
                     }
                 }
-            } else {
-                if ( method_exists( $response, 'get' . ucfirst( $key ) ) ) {
-                    $this->$key = $response->{'get' . ucfirst( $key )}();
-                }
+                continue;
             }
+            if ( method_exists( $response, 'get' . ucfirst( $key ) ) ) {
+                $this->$key = $response->{'get' . ucfirst( $key )}();
+            }
+
+
         }
 
     }
