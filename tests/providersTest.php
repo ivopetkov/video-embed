@@ -200,4 +200,34 @@ class ProvidersTest extends VideoEmbedTestCase
         new IvoPetkov\VideoEmbed('http://invalid/');
     }
 
+    public function testNeProvider() {
+        \IvoPetkov\VideoEmbed\Internal\ProviderRepository::registerProvider(\IvoPetkov\VideoEmbed\Internal\Providers\YouTube::class);
+
+    }
+    public function testNewProviderException() {
+        $this->setExpectedException('\Exception');
+        \IvoPetkov\VideoEmbed\Internal\ProviderRepository::registerProvider(stdClass::class);
+    }
+
+    public function testExceptionWithWrongWidth() {
+        $this->setExpectedException('\Exception');
+        $videoEmbed = new IvoPetkov\VideoEmbed('https://www.youtube.com/watch?v=Pwe-pA6TaZk');
+        $videoEmbed->setSize(false,100);
+    }
+
+    public function testExceptionWithWrongHeight() {
+        $this->setExpectedException('\Exception');
+        $videoEmbed = new IvoPetkov\VideoEmbed('https://www.youtube.com/watch?v=Pwe-pA6TaZk');
+        $videoEmbed->setSize( 100, false );
+    }
+
+    public function testWrongUrl() {
+        $this->setExpectedException('\RuntimeException');
+        new IvoPetkov\VideoEmbed('some not url');
+    }
+
+    public function testEmptyUrl() {
+        $this->setExpectedException('\InvalidArgumentException');
+        new IvoPetkov\VideoEmbed(0);
+    }
 }
