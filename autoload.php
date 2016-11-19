@@ -10,6 +10,9 @@
 $classes = array(
     'IvoPetkov\VideoEmbed' => 'src/VideoEmbed.php',
     'IvoPetkov\VideoEmbed\Internal\Provider' => 'src/VideoEmbed/Internal/Provider.php',
+    'IvoPetkov\VideoEmbed\Internal\ProviderRepository' => 'src/VideoEmbed/Internal/ProviderRepository.php',
+    'IvoPetkov\VideoEmbed\Internal\ProviderInterface' => 'src/VideoEmbed/Internal/ProviderInterface.php',
+    'IvoPetkov\VideoEmbed\Internal\EmbedResponse' => 'src/VideoEmbed/Internal/EmbedResponse.php',
     'IvoPetkov\VideoEmbed\Internal\Providers\CollegeHumor' => 'src/VideoEmbed/Internal/Providers/CollegeHumor.php',
     'IvoPetkov\VideoEmbed\Internal\Providers\Dailymotion' => 'src/VideoEmbed/Internal/Providers/Dailymotion.php',
     'IvoPetkov\VideoEmbed\Internal\Providers\Facebook' => 'src/VideoEmbed/Internal/Providers/Facebook.php',
