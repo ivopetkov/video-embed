@@ -18,5 +18,5 @@ interface ProviderInterface {
      *
      * @return EmbedResponse
      */
-    public static function load( $url, $r );
+    public function load( $url );
 }

@@ -9,49 +9,77 @@
 
 namespace IvoPetkov\VideoEmbed\Internal\Providers;
 
+use IvoPetkov\VideoEmbed\Internal\EmbedResponse;
+use IvoPetkov\VideoEmbed\Internal\Provider;
 use IvoPetkov\VideoEmbed\Internal\ProviderInterface;
 
-final class Vbox7 extends \IvoPetkov\VideoEmbed\Internal\Provider implements ProviderInterface
-{
+final class Vbox7 extends Provider implements ProviderInterface {
 
-    public static function load($url, $result)
-    {
-        $response = parent::readUrl('http://www.vbox7.com/etc/oembed/?url=' . urlencode($url));
-        $result->rawResponse = $response;
+    public function load( $url ) {
+        $response = $this->readUrl( 'http://www.vbox7.com/etc/oembed/?url=' . urlencode( $url ) );
+        $result   = new EmbedResponse();
+        $result->setRawResponse( $response );
+
+        $data     = $this->parseResponse( $response );
+        $urlParts = explode( 'play:', $data['url'] );
+        if ( isset( $urlParts[1] ) ) {
+            $result->setWidth( $this->getIntValueOrNull( $data, 'width' ) );
+            $result->setHeight( $this->getIntValueOrNull( $data, 'height' ) );
+            $result->setHtml( '<iframe src="https://www.vbox7.com/emb/external.php?vid=' . $urlParts[1] . '" frameborder="0" allowfullscreen style="width:' . $result->getWidth() . 'px;height:' . $result->getHeight() . 'px;"></iframe>' );
+            $result->setDuration( $this->getIntValueOrNull( $data, 'duration' ) );
+            $result->setTitle( $this->getStringValueOrNull( $data, 'title' ) );
+            $result->setDescription( $this->getStringValueOrNull( $data, 'description' ) );
+            $result->setThumbnailUrl( $this->getStringValueOrNull( $data, 'thumbnail_url' ) );
+            $result->setThumbnailWidth( $this->getIntValueOrNull( $data, 'thumbnail_width' ) );
+            $result->setThumbnailHeight( $this->getIntValueOrNull( $data, 'thumbnail_height' ) );
+            $result->setAuthorName( $this->getStringValueOrNull( $data, 'author_name' ) );
+            $result->setAuthorUrl( $this->getStringValueOrNull( $data, 'author_url' ) );
+            $result->setProviderName( $this->getStringValueOrNull( $data, 'provider_name' ) );
+            $result->setProviderUrl( $this->getStringValueOrNull( $data, 'provider_url' ) );
+        }
+
+        return $result;
+    }
+
+
+    protected function parseResponse( $raw_response ) {
+        $properties_names = [
+            'title',
+            'author_name',
+            'author_url',
+            'provider_name',
+            'provider_url',
+            'width',
+            'height',
+            'url',
+            'title',
+            'thumbnail_url',
+            'thumbnail_width',
+            'thumbnail_height',
+            'author_name',
+            'author_url',
+            'provider_name',
+            'provider_url',
+        ];
+
         $domDocument = new \DOMDocument();
-        $domDocument->loadXML($response);
-        if ($domDocument->childNodes->item(0)->nodeName === 'oembed') {
-            $properties = [];
-            $findProperty = function($name) use ($domDocument, &$properties) {
-                $elements = $domDocument->getElementsByTagName($name);
-                if ($elements->length === 1) {
-                    $properties[$name] = trim((string) $elements->item(0)->textContent);
-                }
-            };
-            $findProperty('title');
-            $findProperty('author_name');
-            $findProperty('author_url');
-            $findProperty('provider_name');
-            $findProperty('provider_url');
-            $findProperty('width');
-            $findProperty('height');
-            $findProperty('url');
-            $urlParts = explode('play:', $properties['url']);
-            if (isset($urlParts[1])) {
-                $result->width = parent::getIntValueOrNull($properties, 'width');
-                $result->height = parent::getIntValueOrNull($properties, 'height');
-                $result->html = '<iframe src="https://www.vbox7.com/emb/external.php?vid=' . $urlParts[1] . '" frameborder="0" allowfullscreen style="width:' . $result->width . 'px;height:' . $result->height . 'px;"></iframe>';
-                $result->title = parent::getStringValueOrNull($properties, 'title');
-                $result->thumbnail['url'] = parent::getStringValueOrNull($properties, 'thumbnail_url');
-                $result->thumbnail['width'] = parent::getIntValueOrNull($properties, 'thumbnail_width');
-                $result->thumbnail['height'] = parent::getIntValueOrNull($properties, 'thumbnail_height');
-                $result->author['name'] = parent::getStringValueOrNull($properties, 'author_name');
-                $result->author['url'] = parent::getStringValueOrNull($properties, 'author_url');
-                $result->provider['name'] = parent::getStringValueOrNull($properties, 'provider_name');
-                $result->provider['url'] = parent::getStringValueOrNull($properties, 'provider_url');
+        $domDocument->loadXML( $raw_response );
+        if ( $domDocument->childNodes->item( 0 )->nodeName !== 'oembed' ) {
+            throw new  \RuntimeException( 'Failed to parse resposne' );
+        }
+
+        $properties = [];
+        foreach ( $properties_names as $property_name ) {
+            $elements = $domDocument->getElementsByTagName( $property_name );
+            if ( $elements->length === 1 ) {
+                $properties[ $property_name ] = trim( (string) $elements->item( 0 )->textContent );
             }
         }
+
+        return $properties;
+
     }
+
 
     /**
      * Get all urls registered by provider
@@ -59,6 +87,6 @@ final class Vbox7 extends \IvoPetkov\VideoEmbed\Internal\Provider implements Pro
      * @return array
      */
     public static function getRegisteredHostnames() {
-        return ['vbox7.com', '*.vbox7.com'];
+        return [ 'vbox7.com', '*.vbox7.com' ];
     }
 }

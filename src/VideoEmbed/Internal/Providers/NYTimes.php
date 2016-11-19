@@ -9,31 +9,32 @@
 
 namespace IvoPetkov\VideoEmbed\Internal\Providers;
 
+use IvoPetkov\VideoEmbed\Internal\EmbedResponse;
+use IvoPetkov\VideoEmbed\Internal\Provider;
 use IvoPetkov\VideoEmbed\Internal\ProviderInterface;
 
-final class NYTimes extends \IvoPetkov\VideoEmbed\Internal\Provider implements ProviderInterface
-{
+final class NYTimes extends Provider implements ProviderInterface {
 
-    public static function load($url, $result)
-    {
-        $response = parent::readUrl('https://www.nytimes.com/svc/oembed/json/?url=' . urlencode($url));
-        $result->rawResponse = $response;
-        $data = json_decode($response, true);
-        if (is_array($data)) {
-            $result->html = parent::getStringValueOrNull($data, 'html');
-            $result->width = parent::getIntValueOrNull($data, 'width');
-            $result->height = parent::getIntValueOrNull($data, 'height');
-            $result->duration = parent::getIntValueOrNull($data, 'duration');
-            $result->title = parent::getStringValueOrNull($data, 'title');
-            $result->description = parent::getStringValueOrNull($data, 'description');
-            $result->thumbnail['url'] = parent::getStringValueOrNull($data, 'thumbnail_url');
-            $result->thumbnail['width'] = parent::getIntValueOrNull($data, 'thumbnail_width');
-            $result->thumbnail['height'] = parent::getIntValueOrNull($data, 'thumbnail_height');
-            $result->author['name'] = parent::getStringValueOrNull($data, 'author_name');
-            $result->author['url'] = parent::getStringValueOrNull($data, 'author_url');
-            $result->provider['name'] = parent::getStringValueOrNull($data, 'provider_name');
-            $result->provider['url'] = parent::getStringValueOrNull($data, 'provider_url');
-        }
+    public function load( $url ) {
+        $response = $this->readUrl( 'https://www.nytimes.com/svc/oembed/json/?url=' . urlencode( $url ) );
+        $result   = new EmbedResponse();
+        $result->setRawResponse( $response );
+        $data = $this->parseResponse( $response );
+        $result->setHtml( $this->getStringValueOrNull( $data, 'html' ) );
+        $result->setWidth( $this->getIntValueOrNull( $data, 'width' ) );
+        $result->setHeight( $this->getIntValueOrNull( $data, 'height' ) );
+        $result->setDuration( $this->getIntValueOrNull( $data, 'duration' ) );
+        $result->setTitle( $this->getStringValueOrNull( $data, 'title' ) );
+        $result->setDescription( $this->getStringValueOrNull( $data, 'description' ) );
+        $result->setThumbnailUrl( $this->getStringValueOrNull( $data, 'thumbnail_url' ) );
+        $result->setThumbnailWidth( $this->getIntValueOrNull( $data, 'thumbnail_width' ) );
+        $result->setThumbnailHeight( $this->getIntValueOrNull( $data, 'thumbnail_height' ) );
+        $result->setAuthorName( $this->getStringValueOrNull( $data, 'author_name' ) );
+        $result->setAuthorUrl( $this->getStringValueOrNull( $data, 'author_url' ) );
+        $result->setProviderName( $this->getStringValueOrNull( $data, 'provider_name' ) );
+        $result->setProviderUrl( $this->getStringValueOrNull( $data, 'provider_url' ) );
+
+        return $result;
     }
 
 
@@ -43,6 +44,6 @@ final class NYTimes extends \IvoPetkov\VideoEmbed\Internal\Provider implements P
      * @return array
      */
     public static function getRegisteredHostnames() {
-       return ['nytimes.com'];
+        return [ 'nytimes.com' ];
     }
 }

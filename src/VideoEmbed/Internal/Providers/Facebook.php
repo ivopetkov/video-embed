@@ -9,35 +9,37 @@
 
 namespace IvoPetkov\VideoEmbed\Internal\Providers;
 
+use IvoPetkov\VideoEmbed\Internal\EmbedResponse;
+use IvoPetkov\VideoEmbed\Internal\Provider;
 use IvoPetkov\VideoEmbed\Internal\ProviderInterface;
 
-final class Facebook extends \IvoPetkov\VideoEmbed\Internal\Provider implements ProviderInterface
-{
+final class Facebook extends Provider implements ProviderInterface {
 
-    public static function load($url, $result)
-    {
-        $response = parent::readUrl('https://www.facebook.com/plugins/video/oembed.json/?url=' . urlencode($url));
-        $result->rawResponse = $response;
-        $data = json_decode($response, true);
-        if (is_array($data)) {
-            $urlParts = explode('/', trim($url, '/'));
-            $videoID = $urlParts[sizeof($urlParts) - 1];
-            if (is_numeric($videoID)) {
-                $result->width = parent::getIntValueOrNull($data, 'width');
-                $result->height = parent::getIntValueOrNull($data, 'height');
-                $result->html = '<iframe src="https://www.facebook.com/video/embed?video_id=' . $videoID . '" width="' . $result->width . '" height="' . $result->height . '" frameborder="0"></iframe>';
-                $result->duration = parent::getIntValueOrNull($data, 'duration');
-                $result->title = parent::getStringValueOrNull($data, 'title');
-                $result->description = parent::getStringValueOrNull($data, 'description');
-                $result->thumbnail['url'] = parent::getStringValueOrNull($data, 'thumbnail_url');
-                $result->thumbnail['width'] = parent::getIntValueOrNull($data, 'thumbnail_width');
-                $result->thumbnail['height'] = parent::getIntValueOrNull($data, 'thumbnail_height');
-                $result->author['name'] = parent::getStringValueOrNull($data, 'author_name');
-                $result->author['url'] = parent::getStringValueOrNull($data, 'author_url');
-                $result->provider['name'] = parent::getStringValueOrNull($data, 'provider_name');
-                $result->provider['url'] = parent::getStringValueOrNull($data, 'provider_url');
-            }
+    public function load( $url ) {
+        $response = $this->readUrl( 'https://www.facebook.com/plugins/video/oembed.json/?url=' . urlencode( $url ) );
+
+        $result = new EmbedResponse();
+        $result->setRawResponse( $response );
+        $data     = $this->parseResponse( $response );
+        $urlParts = explode( '/', trim( $url, '/' ) );
+        $videoID  = $urlParts[ count( $urlParts ) - 1 ];
+        if ( is_numeric( $videoID ) ) {
+            $result->setWidth( $this->getIntValueOrNull( $data, 'width' ) );
+            $result->setHeight( $this->getIntValueOrNull( $data, 'height' ) );
+            $result->setHtml( '<iframe src="https://www.facebook.com/video/embed?video_id=' . $videoID . '" width="' . $result->getWidth() . '" height="' . $result->getHeight() . '" frameborder="0"></iframe>' );
+            $result->setDuration( $this->getIntValueOrNull( $data, 'duration' ) );
+            $result->setTitle( $this->getStringValueOrNull( $data, 'title' ) );
+            $result->setDescription( $this->getStringValueOrNull( $data, 'description' ) );
+            $result->setThumbnailUrl( $this->getStringValueOrNull( $data, 'thumbnail_url' ) );
+            $result->setThumbnailWidth( $this->getIntValueOrNull( $data, 'thumbnail_width' ) );
+            $result->setThumbnailHeight( $this->getIntValueOrNull( $data, 'thumbnail_height' ) );
+            $result->setAuthorName( $this->getStringValueOrNull( $data, 'author_name' ) );
+            $result->setAuthorUrl( $this->getStringValueOrNull( $data, 'author_url' ) );
+            $result->setProviderName( $this->getStringValueOrNull( $data, 'provider_name' ) );
+            $result->setProviderUrl( $this->getStringValueOrNull( $data, 'provider_url' ) );
         }
+
+        return $result;
     }
 
     /**
@@ -46,6 +48,6 @@ final class Facebook extends \IvoPetkov\VideoEmbed\Internal\Provider implements 
      * @return array
      */
     public static function getRegisteredHostnames() {
-        return  ['facebook.com'];
+        return [ 'facebook.com' ];
     }
 }

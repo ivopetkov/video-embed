@@ -59,8 +59,9 @@ class EmbedResponse {
      */
     protected $provider_url;
     /**
-     *
+     * @var
      */
+    protected $raw_response;
 
     /**
      * @return mixed
@@ -292,6 +293,24 @@ class EmbedResponse {
      */
     public function setProviderUrl( $provider_url ) {
         $this->provider_url = $provider_url;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRawResponse() {
+        return $this->raw_response;
+    }
+
+    /**
+     * @param mixed $raw_response
+     *
+     * @return EmbedResponse
+     */
+    public function setRawResponse( $raw_response ) {
+        $this->raw_response = $raw_response;
 
         return $this;
     }

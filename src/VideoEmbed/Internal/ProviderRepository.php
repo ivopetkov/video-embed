@@ -47,7 +47,7 @@ class ProviderRepository {
             $hostnames = $provider::getRegisteredHostnames();
 
             if ( self::matchDomain( $hostname, $hostnames ) ) {
-                return $provider;
+                return new $provider;
             }
         }
 
