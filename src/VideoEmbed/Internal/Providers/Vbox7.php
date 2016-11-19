@@ -41,14 +41,9 @@ final class Vbox7 extends Provider implements ProviderInterface {
             'width',
             'height',
             'url',
-            'title',
             'thumbnail_url',
             'thumbnail_width',
             'thumbnail_height',
-            'author_name',
-            'author_url',
-            'provider_name',
-            'provider_url',
         ];
 
         $domDocument = new \DOMDocument();
