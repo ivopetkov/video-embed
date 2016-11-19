@@ -9,7 +9,6 @@
 
 namespace IvoPetkov\VideoEmbed\Internal\Providers;
 
-use IvoPetkov\VideoEmbed\Internal\EmbedResponse;
 use IvoPetkov\VideoEmbed\Internal\Provider;
 use IvoPetkov\VideoEmbed\Internal\ProviderInterface;
 
@@ -17,24 +16,15 @@ final class Hulu extends Provider implements ProviderInterface {
 
     public function load( $url ) {
         $response = $this->readUrl( 'http://hulu.com/api/oembed.json?url=' . urlencode( $url ) );
-        $result   = new EmbedResponse();
-        $result->setRawResponse( $response );
-        $data = $this->parseResponse( $response );
-        $result->setHtml( $this->getStringValueOrNull( $data, 'html' ) );
-        $result->setWidth( $this->getIntValueOrNull( $data, 'width' ) );
-        $result->setHeight( $this->getIntValueOrNull( $data, 'height' ) );
-        $result->setDuration( $this->getIntValueOrNull( $data, 'duration' ) );
-        $result->setTitle( $this->getStringValueOrNull( $data, 'title' ) );
-        $result->setDescription( $this->getStringValueOrNull( $data, 'description' ) );
-        $result->setThumbnailUrl( $this->getStringValueOrNull( $data, 'large_thumbnail_url' ) );
-        $result->setThumbnailWidth( $this->getIntValueOrNull( $data, 'large_thumbnail_width' ) );
-        $result->setThumbnailHeight( $this->getIntValueOrNull( $data, 'large_thumbnail_height' ) );
-        $result->setAuthorName( $this->getStringValueOrNull( $data, 'author_name' ) );
-        $result->setAuthorUrl( $this->getStringValueOrNull( $data, 'author_url' ) );
-        $result->setProviderName( $this->getStringValueOrNull( $data, 'provider_name' ) );
-        $result->setProviderUrl( $this->getStringValueOrNull( $data, 'provider_url' ) );
 
-        return $result;
+        $data     = $this->parseResponse( $response );
+        $response = $this->buildResponse( $data )->setRawResponse( $response );
+        $response->setThumbnailUrl( $this->getStringValueOrNull( $data, 'large_thumbnail_url' ) );
+        $response->setThumbnailWidth( $this->getIntValueOrNull( $data, 'large_thumbnail_width' ) );
+        $response->setThumbnailHeight( $this->getIntValueOrNull( $data, 'large_thumbnail_height' ) );
+
+        return $response;
+
     }
 
     /**

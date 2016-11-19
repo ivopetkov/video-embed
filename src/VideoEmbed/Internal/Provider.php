@@ -47,10 +47,28 @@ class Provider {
     }
 
     /**
-     * @param array $response
+     * @param array $result
+     *
+     * @return EmbedResponse
      */
-    public function buildResponse( $response ) {
+    public function buildResponse( $result ) {
+        $response = new EmbedResponse();
 
+        $response->setHtml( $this->getStringValueOrNull( $result, 'html' ) );
+        $response->setWidth( $this->getIntValueOrNull( $result, 'width' ) );
+        $response->setHeight( $this->getIntValueOrNull( $result, 'height' ) );
+        $response->setDuration( $this->getIntValueOrNull( $result, 'duration' ) );
+        $response->setTitle( $this->getStringValueOrNull( $result, 'title' ) );
+        $response->setDescription( $this->getStringValueOrNull( $result, 'description' ) );
+        $response->setThumbnailUrl( $this->getStringValueOrNull( $result, 'thumbnail_url' ) );
+        $response->setThumbnailWidth( $this->getIntValueOrNull( $result, 'thumbnail_width' ) );
+        $response->setThumbnailHeight( $this->getIntValueOrNull( $result, 'thumbnail_height' ) );
+        $response->setAuthorName( $this->getStringValueOrNull( $result, 'author_name' ) );
+        $response->setAuthorUrl( $this->getStringValueOrNull( $result, 'author_url' ) );
+        $response->setProviderName( $this->getStringValueOrNull( $result, 'provider_name' ) );
+        $response->setProviderUrl( $this->getStringValueOrNull( $result, 'provider_url' ) );
+
+        return $response;
     }
 
 }

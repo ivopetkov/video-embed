@@ -9,7 +9,6 @@
 
 namespace IvoPetkov\VideoEmbed\Internal\Providers;
 
-use IvoPetkov\VideoEmbed\Internal\EmbedResponse;
 use IvoPetkov\VideoEmbed\Internal\Provider;
 use IvoPetkov\VideoEmbed\Internal\ProviderInterface;
 
@@ -18,28 +17,15 @@ final class Facebook extends Provider implements ProviderInterface {
     public function load( $url ) {
         $response = $this->readUrl( 'https://www.facebook.com/plugins/video/oembed.json/?url=' . urlencode( $url ) );
 
-        $result = new EmbedResponse();
-        $result->setRawResponse( $response );
         $data     = $this->parseResponse( $response );
         $urlParts = explode( '/', trim( $url, '/' ) );
         $videoID  = $urlParts[ count( $urlParts ) - 1 ];
         if ( is_numeric( $videoID ) ) {
-            $result->setWidth( $this->getIntValueOrNull( $data, 'width' ) );
-            $result->setHeight( $this->getIntValueOrNull( $data, 'height' ) );
-            $result->setHtml( '<iframe src="https://www.facebook.com/video/embed?video_id=' . $videoID . '" width="' . $result->getWidth() . '" height="' . $result->getHeight() . '" frameborder="0"></iframe>' );
-            $result->setDuration( $this->getIntValueOrNull( $data, 'duration' ) );
-            $result->setTitle( $this->getStringValueOrNull( $data, 'title' ) );
-            $result->setDescription( $this->getStringValueOrNull( $data, 'description' ) );
-            $result->setThumbnailUrl( $this->getStringValueOrNull( $data, 'thumbnail_url' ) );
-            $result->setThumbnailWidth( $this->getIntValueOrNull( $data, 'thumbnail_width' ) );
-            $result->setThumbnailHeight( $this->getIntValueOrNull( $data, 'thumbnail_height' ) );
-            $result->setAuthorName( $this->getStringValueOrNull( $data, 'author_name' ) );
-            $result->setAuthorUrl( $this->getStringValueOrNull( $data, 'author_url' ) );
-            $result->setProviderName( $this->getStringValueOrNull( $data, 'provider_name' ) );
-            $result->setProviderUrl( $this->getStringValueOrNull( $data, 'provider_url' ) );
+            $response = $this->buildResponse( $data )->setRawResponse( $response );
+            $response->setHtml( '<iframe src="https://www.facebook.com/video/embed?video_id=' . $videoID . '" width="' . $response->getWidth() . '" height="' . $response->getHeight() . '" frameborder="0"></iframe>' );
         }
 
-        return $result;
+        return $response;
     }
 
     /**

@@ -23,22 +23,11 @@ final class Vbox7 extends Provider implements ProviderInterface {
         $data     = $this->parseResponse( $response );
         $urlParts = explode( 'play:', $data['url'] );
         if ( isset( $urlParts[1] ) ) {
-            $result->setWidth( $this->getIntValueOrNull( $data, 'width' ) );
-            $result->setHeight( $this->getIntValueOrNull( $data, 'height' ) );
-            $result->setHtml( '<iframe src="https://www.vbox7.com/emb/external.php?vid=' . $urlParts[1] . '" frameborder="0" allowfullscreen style="width:' . $result->getWidth() . 'px;height:' . $result->getHeight() . 'px;"></iframe>' );
-            $result->setDuration( $this->getIntValueOrNull( $data, 'duration' ) );
-            $result->setTitle( $this->getStringValueOrNull( $data, 'title' ) );
-            $result->setDescription( $this->getStringValueOrNull( $data, 'description' ) );
-            $result->setThumbnailUrl( $this->getStringValueOrNull( $data, 'thumbnail_url' ) );
-            $result->setThumbnailWidth( $this->getIntValueOrNull( $data, 'thumbnail_width' ) );
-            $result->setThumbnailHeight( $this->getIntValueOrNull( $data, 'thumbnail_height' ) );
-            $result->setAuthorName( $this->getStringValueOrNull( $data, 'author_name' ) );
-            $result->setAuthorUrl( $this->getStringValueOrNull( $data, 'author_url' ) );
-            $result->setProviderName( $this->getStringValueOrNull( $data, 'provider_name' ) );
-            $result->setProviderUrl( $this->getStringValueOrNull( $data, 'provider_url' ) );
+            $response = $this->buildResponse( $data )->setRawResponse( $response );
+            $response->setHtml( '<iframe src="https://www.vbox7.com/emb/external.php?vid=' . $urlParts[1] . '" frameborder="0" allowfullscreen style="width:' . $response->getWidth() . 'px;height:' . $response->getHeight() . 'px;"></iframe>' );
         }
 
-        return $result;
+        return $response;
     }
 
 
