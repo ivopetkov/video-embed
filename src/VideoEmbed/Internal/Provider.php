@@ -12,17 +12,17 @@ namespace IvoPetkov\VideoEmbed\Internal;
 class Provider
 {
 
-    static function getStringValueOrNull($array, $key)
+    protected static function getStringValueOrNull($array, $key)
     {
         return isset($array[$key]) ? (string) $array[$key] : null;
     }
 
-    static function getIntValueOrNull($array, $key)
+    protected static function getIntValueOrNull($array, $key)
     {
         return isset($array[$key]) ? (int) $array[$key] : null;
     }
 
-    static function readUrl($url)
+    protected static function readUrl($url)
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);

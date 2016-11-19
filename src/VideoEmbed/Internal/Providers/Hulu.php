@@ -12,7 +12,7 @@ namespace IvoPetkov\VideoEmbed\Internal\Providers;
 final class Hulu extends \IvoPetkov\VideoEmbed\Internal\Provider
 {
 
-    static function load($url, $result)
+    public static function load($url, $result)
     {
         $response = parent::readUrl('http://hulu.com/api/oembed.json?url=' . urlencode($url));
         $result->rawResponse = $response;

@@ -12,7 +12,7 @@ namespace IvoPetkov\VideoEmbed\Internal\Providers;
 final class Vimeo extends \IvoPetkov\VideoEmbed\Internal\Provider
 {
 
-    static function load($url, $result)
+    public static function load($url, $result)
     {
         $response = parent::readUrl('https://www.vimeo.com/api/oembed.json?url=' . urlencode($url));
         $result->rawResponse = $response;

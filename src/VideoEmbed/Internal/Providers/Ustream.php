@@ -12,7 +12,7 @@ namespace IvoPetkov\VideoEmbed\Internal\Providers;
 final class Ustream extends \IvoPetkov\VideoEmbed\Internal\Provider
 {
 
-    static function load($url, $result)
+    public static function load($url, $result)
     {
         $response = parent::readUrl('http://www.ustream.tv/oembed?url=' . urlencode($url) . '&format=json');
         $result->rawResponse = $response;

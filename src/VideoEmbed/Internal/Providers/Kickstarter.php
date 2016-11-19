@@ -12,7 +12,7 @@ namespace IvoPetkov\VideoEmbed\Internal\Providers;
 final class Kickstarter extends \IvoPetkov\VideoEmbed\Internal\Provider
 {
 
-    static function load($url, $result)
+    public static function load($url, $result)
     {
         $response = parent::readUrl('http://www.kickstarter.com/services/oembed?url=' . urlencode($url) . '&format=json');
         $result->rawResponse = $response;

@@ -12,7 +12,7 @@ namespace IvoPetkov\VideoEmbed\Internal\Providers;
 final class FunnyOrDie extends \IvoPetkov\VideoEmbed\Internal\Provider
 {
 
-    static function load($url, $result)
+    public static function load($url, $result)
     {
         $response = parent::readUrl('http://www.funnyordie.com/oembed.json?url=' . urlencode($url));
         $result->rawResponse = $response;
