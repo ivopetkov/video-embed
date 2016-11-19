@@ -28,7 +28,10 @@ class ProviderRepository {
 
 
     public static function registerProvider( $provider ) {
-
+        if ( ! in_array( 'IvoPetkov\\VideoEmbed\\Internal\\ProviderInterface', class_implements( $provider ), true )) {
+            throw new \RuntimeException('Given provider is should implement ProviderInterface');
+        }
+        static::$providers[] = $provider;
     }
 
     /**
