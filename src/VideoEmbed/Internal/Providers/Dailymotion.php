@@ -9,10 +9,12 @@
 
 namespace IvoPetkov\VideoEmbed\Internal\Providers;
 
-final class Dailymotion extends \IvoPetkov\VideoEmbed\Internal\Provider
+use IvoPetkov\VideoEmbed\Internal\ProviderInterface;
+
+final class Dailymotion extends \IvoPetkov\VideoEmbed\Internal\Provider implements ProviderInterface
 {
 
-    public static function load($url, $result)
+    public static function load($url,$result)
     {
         $response = parent::readUrl('http://www.dailymotion.com/services/oembed?url=' . urlencode($url) . '&format=json');
         $result->rawResponse = $response;
@@ -34,4 +36,12 @@ final class Dailymotion extends \IvoPetkov\VideoEmbed\Internal\Provider
         }
     }
 
+    /**
+     * Get all urls registered by provider
+     *
+     * @return array
+     */
+    public static function getRegisteredHostnames() {
+        return ['dailymotion.com'];
+    }
 }

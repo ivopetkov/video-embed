@@ -9,6 +9,9 @@
 
 namespace IvoPetkov;
 
+use IvoPetkov\VideoEmbed\Internal\ProviderInterface;
+use IvoPetkov\VideoEmbed\Internal\ProviderRepository;
+
 class VideoEmbed
 {
 
@@ -94,27 +97,7 @@ class VideoEmbed
      */
     public $rawResponse = null;
 
-    /**
-     * Providers list
-     * 
-     * @var array
-     */
-    static private $providers = [
-        'CollegeHumor' => ['collegehumor.com'],
-        'Dailymotion' => ['dailymotion.com'],
-        'Facebook' => ['facebook.com'],
-        'Flickr' => ['flickr.com', '*.flickr.com', 'flic.kr'],
-        'FunnyOrDie' => ['funnyordie.com'],
-        'Hulu' => ['hulu.com'],
-        'Kickstarter' => ['kickstarter.com'],
-        'NYTimes' => ['nytimes.com'],
-        'Ted' => ['ted.com'],
-        'Ustream' => ['ustream.com', 'ustream.tv', '*.ustream.tv'],
-        'Vbox7' => ['vbox7.com', '*.vbox7.com'],
-        'Vimeo' => ['vimeo.com', 'player.vimeo.com'],
-        'Vine' => ['vine.co'],
-        'YouTube' => ['youtube.com', 'youtu.be']
-    ];
+
 
     /**
      * Creates a new VideoEmbed object and load it if an url is specified
@@ -143,39 +126,16 @@ class VideoEmbed
         }
         $this->url = $url;
 
-        // Converts PHP errors and warnings to Exceptions
-        set_error_handler(function() {
-            throw new \Exception(func_get_arg(1));
-        });
-
         $errorReason = '';
+
         try {
-            $urlData = parse_url($this->url);
-            if (isset($urlData['host'])) {
-                $hostname = $urlData['host'];
-                if (substr($hostname, 0, 4) === 'www.') {
-                    $hostname = substr($hostname, 4);
-                }
-                foreach (self::$providers as $name => $domains) {
-                    $done = false;
-                    foreach ($domains as $domain) {
-                        if (preg_match('/^' . str_replace(['.', '*'], ['\.', '.*'], $domain) . '$/', $hostname)) {
-                            include_once __DIR__ . DIRECTORY_SEPARATOR . 'VideoEmbed' . DIRECTORY_SEPARATOR . 'Internal' . DIRECTORY_SEPARATOR . 'Providers' . DIRECTORY_SEPARATOR . $name . '.php';
-                            call_user_func(['\IvoPetkov\VideoEmbed\Internal\Providers\\' . $name, 'load'], $this->url, $this);
-                            $done = true;
-                            break;
-                        }
-                    }
-                    if ($done) {
-                        break;
-                    }
-                }
-            }
-        } catch (\Exception $e) {
+            /** @var ProviderInterface $provider */
+            $provider = ProviderRepository::find( $this->url );
+            $provider::load( $this->url, $this );
+        } catch ( \Exception $e ) {
             $errorReason = $e->getMessage();
         }
 
-        restore_error_handler();
         if ($this->html === null) {
             throw new \Exception('Cannot retrieve information about ' . $this->url . ' (reason: ' . (isset($errorReason{0}) ? $errorReason : 'unknown') . ')');
         }

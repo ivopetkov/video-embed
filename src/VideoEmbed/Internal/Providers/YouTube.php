@@ -9,7 +9,9 @@
 
 namespace IvoPetkov\VideoEmbed\Internal\Providers;
 
-final class YouTube extends \IvoPetkov\VideoEmbed\Internal\Provider
+use IvoPetkov\VideoEmbed\Internal\ProviderInterface;
+
+final class YouTube extends \IvoPetkov\VideoEmbed\Internal\Provider implements ProviderInterface
 {
 
     public static function load($url, $result)
@@ -32,4 +34,12 @@ final class YouTube extends \IvoPetkov\VideoEmbed\Internal\Provider
         }
     }
 
+    /**
+     * Get all urls registered by provider
+     *
+     * @return array
+     */
+    public static function getRegisteredHostnames() {
+        return [ 'youtube.com', 'youtu.be' ];
+    }
 }
