@@ -134,7 +134,7 @@ class VideoEmbed
      * @param string $url The video url
      * @throws \Exception
      * @throws \InvalidArgumentException
-     * @return void No value is returned
+     * @return VideoEmbed
      */
     public function load($url)
     {
@@ -179,6 +179,8 @@ class VideoEmbed
         if ($this->html === null) {
             throw new \Exception('Cannot retrieve information about ' . $this->url . ' (reason: ' . (isset($errorReason{0}) ? $errorReason : 'unknown') . ')');
         }
+
+        return $this;
     }
 
     /**
@@ -187,7 +189,7 @@ class VideoEmbed
      * @param string|int $width Thew new width
      * @param string|int $height Thew new height
      * @throws \InvalidArgumentException
-     * @return void No value is returned
+     * @return VideoEmbed
      */
     public function setSize($width, $height)
     {
@@ -205,6 +207,7 @@ class VideoEmbed
         $this->html = preg_replace("/ height([ ]?)=([ ]?)([0-9\.]+)/", " height=" . $height, $this->html);
         $this->width = $width;
         $this->height = $height;
+        return $this;
     }
 
 }
