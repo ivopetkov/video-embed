@@ -12,16 +12,18 @@ namespace IvoPetkov\VideoEmbed\Internal\Providers;
 use IvoPetkov\VideoEmbed\Internal\Provider;
 use IvoPetkov\VideoEmbed\Internal\ProviderInterface;
 
-final class Hulu extends Provider implements ProviderInterface {
+final class Hulu extends Provider implements ProviderInterface
+{
 
-    public function load( $url ) {
-        $response = $this->readUrl( 'http://hulu.com/api/oembed.json?url=' . urlencode( $url ) );
+    public function load($url)
+    {
+        $response = $this->readUrl('http://hulu.com/api/oembed.json?url=' . urlencode($url));
 
-        $data     = $this->parseResponse( $response );
-        $response = $this->buildResponse( $data )->setRawResponse( $response );
-        $response->setThumbnailUrl( $this->getStringValueOrNull( $data, 'large_thumbnail_url' ) );
-        $response->setThumbnailWidth( $this->getIntValueOrNull( $data, 'large_thumbnail_width' ) );
-        $response->setThumbnailHeight( $this->getIntValueOrNull( $data, 'large_thumbnail_height' ) );
+        $data     = $this->parseResponse($response);
+        $response = $this->buildResponse($data)->setRawResponse($response);
+        $response->setThumbnailUrl($this->getStringValueOrNull($data, 'large_thumbnail_url'));
+        $response->setThumbnailWidth($this->getIntValueOrNull($data, 'large_thumbnail_width'));
+        $response->setThumbnailHeight($this->getIntValueOrNull($data, 'large_thumbnail_height'));
 
         return $response;
 
@@ -32,7 +34,8 @@ final class Hulu extends Provider implements ProviderInterface {
      *
      * @return array
      */
-    public static function getRegisteredHostnames() {
-        return [ 'hulu.com' ];
+    public static function getRegisteredHostnames()
+    {
+        return ['hulu.com'];
     }
 }

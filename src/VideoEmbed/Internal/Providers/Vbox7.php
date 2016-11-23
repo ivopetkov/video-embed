@@ -13,25 +13,28 @@ use IvoPetkov\VideoEmbed\Internal\EmbedResponse;
 use IvoPetkov\VideoEmbed\Internal\Provider;
 use IvoPetkov\VideoEmbed\Internal\ProviderInterface;
 
-final class Vbox7 extends Provider implements ProviderInterface {
+final class Vbox7 extends Provider implements ProviderInterface
+{
 
-    public function load( $url ) {
-        $response = $this->readUrl( 'http://www.vbox7.com/etc/oembed/?url=' . urlencode( $url ) );
+    public function load($url)
+    {
+        $response = $this->readUrl('http://www.vbox7.com/etc/oembed/?url=' . urlencode($url));
         $result   = new EmbedResponse();
-        $result->setRawResponse( $response );
+        $result->setRawResponse($response);
 
-        $data     = $this->parseResponse( $response );
-        $urlParts = explode( 'play:', $data['url'] );
-        if ( isset( $urlParts[1] ) ) {
-            $response = $this->buildResponse( $data )->setRawResponse( $response );
-            $response->setHtml( '<iframe src="https://www.vbox7.com/emb/external.php?vid=' . $urlParts[1] . '" frameborder="0" allowfullscreen style="width:' . $response->getWidth() . 'px;height:' . $response->getHeight() . 'px;"></iframe>' );
+        $data     = $this->parseResponse($response);
+        $urlParts = explode('play:', $data['url']);
+        if (isset($urlParts[1])) {
+            $response = $this->buildResponse($data)->setRawResponse($response);
+            $response->setHtml('<iframe src="https://www.vbox7.com/emb/external.php?vid=' . $urlParts[1] . '" frameborder="0" allowfullscreen style="width:' . $response->getWidth() . 'px;height:' . $response->getHeight() . 'px;"></iframe>');
         }
 
         return $response;
     }
 
 
-    protected function parseResponse( $rawResponse ) {
+    protected function parseResponse($rawResponse)
+    {
         $propertiesNames = [
             'title',
             'author_name',
@@ -47,16 +50,16 @@ final class Vbox7 extends Provider implements ProviderInterface {
         ];
 
         $domDocument = new \DOMDocument();
-        $domDocument->loadXML( $rawResponse );
-        if ( $domDocument->childNodes->item( 0 )->nodeName !== 'oembed' ) {
-            throw new  \RuntimeException( 'Failed to parse resposne' );
+        $domDocument->loadXML($rawResponse);
+        if ($domDocument->childNodes->item(0)->nodeName !== 'oembed') {
+            throw new  \RuntimeException('Failed to parse resposne');
         }
 
         $properties = [];
-        foreach ( $propertiesNames as $propertyName ) {
-            $elements = $domDocument->getElementsByTagName( $propertyName );
-            if ( $elements->length === 1 ) {
-                $properties[ $propertyName ] = trim( (string) $elements->item( 0 )->textContent );
+        foreach ($propertiesNames as $propertyName) {
+            $elements = $domDocument->getElementsByTagName($propertyName);
+            if ($elements->length === 1) {
+                $properties[$propertyName] = trim((string)$elements->item(0)->textContent);
             }
         }
 
@@ -70,7 +73,8 @@ final class Vbox7 extends Provider implements ProviderInterface {
      *
      * @return array
      */
-    public static function getRegisteredHostnames() {
-        return [ 'vbox7.com', '*.vbox7.com' ];
+    public static function getRegisteredHostnames()
+    {
+        return ['vbox7.com', '*.vbox7.com'];
     }
 }

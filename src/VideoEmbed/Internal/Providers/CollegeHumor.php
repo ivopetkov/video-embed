@@ -12,13 +12,15 @@ namespace IvoPetkov\VideoEmbed\Internal\Providers;
 use IvoPetkov\VideoEmbed\Internal\Provider;
 use IvoPetkov\VideoEmbed\Internal\ProviderInterface;
 
-final class CollegeHumor extends Provider implements ProviderInterface {
+final class CollegeHumor extends Provider implements ProviderInterface
+{
 
-    public function load( $url ) {
-        $response = $this->readUrl( 'http://www.collegehumor.com/oembed.json?url=' . urlencode( $url ) );
+    public function load($url)
+    {
+        $response = $this->readUrl('http://www.collegehumor.com/oembed.json?url=' . urlencode($url));
 
-        $data     = $this->parseResponse( $response );
-        $response = $this->buildResponse( $data )->setRawResponse( $response );
+        $data     = $this->parseResponse($response);
+        $response = $this->buildResponse($data)->setRawResponse($response);
 
         return $response;
     }
@@ -28,7 +30,8 @@ final class CollegeHumor extends Provider implements ProviderInterface {
      *
      * @return array
      */
-    public static function getRegisteredHostnames() {
-        return [ 'collegehumor.com' ];
+    public static function getRegisteredHostnames()
+    {
+        return ['collegehumor.com'];
     }
 }

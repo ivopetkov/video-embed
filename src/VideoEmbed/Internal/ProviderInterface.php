@@ -3,7 +3,8 @@
 namespace IvoPetkov\VideoEmbed\Internal;
 
 
-interface ProviderInterface {
+interface ProviderInterface
+{
 
     /**
      * Get all urls registered by provider
@@ -18,5 +19,5 @@ interface ProviderInterface {
      *
      * @return EmbedResponse
      */
-    public function load( $url );
+    public function load($url);
 }

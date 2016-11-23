@@ -12,13 +12,15 @@ namespace IvoPetkov\VideoEmbed\Internal\Providers;
 use IvoPetkov\VideoEmbed\Internal\Provider;
 use IvoPetkov\VideoEmbed\Internal\ProviderInterface;
 
-final class YouTube extends Provider implements ProviderInterface {
+final class YouTube extends Provider implements ProviderInterface
+{
 
-    public function load( $url ) {
-        $response = $this->readUrl( 'https://www.youtube.com/oembed?url=' . urlencode( $url ) . '&format=json' );
+    public function load($url)
+    {
+        $response = $this->readUrl('https://www.youtube.com/oembed?url=' . urlencode($url) . '&format=json');
 
-        $data     = $this->parseResponse( $response );
-        $response = $this->buildResponse( $data )->setRawResponse( $response );
+        $data     = $this->parseResponse($response);
+        $response = $this->buildResponse($data)->setRawResponse($response);
 
         return $response;
     }
@@ -28,7 +30,8 @@ final class YouTube extends Provider implements ProviderInterface {
      *
      * @return array
      */
-    public static function getRegisteredHostnames() {
-        return [ 'youtube.com', 'youtu.be' ];
+    public static function getRegisteredHostnames()
+    {
+        return ['youtube.com', 'youtu.be'];
     }
 }

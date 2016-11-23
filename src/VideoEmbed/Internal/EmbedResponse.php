@@ -3,7 +3,8 @@
 namespace IvoPetkov\VideoEmbed\Internal;
 
 
-class EmbedResponse {
+class EmbedResponse
+{
 
     /**
      * @var string
@@ -66,7 +67,8 @@ class EmbedResponse {
     /**
      * @return mixed
      */
-    public function getHtml() {
+    public function getHtml()
+    {
         return $this->html;
     }
 
@@ -75,7 +77,8 @@ class EmbedResponse {
      *
      * @return EmbedResponse
      */
-    public function setHtml( $html ) {
+    public function setHtml($html)
+    {
         $this->html = $html;
 
         return $this;
@@ -84,7 +87,8 @@ class EmbedResponse {
     /**
      * @return mixed
      */
-    public function getWidth() {
+    public function getWidth()
+    {
         return $this->width;
     }
 
@@ -93,7 +97,8 @@ class EmbedResponse {
      *
      * @return EmbedResponse
      */
-    public function setWidth( $width ) {
+    public function setWidth($width)
+    {
         $this->width = $width;
 
         return $this;
@@ -102,7 +107,8 @@ class EmbedResponse {
     /**
      * @return mixed
      */
-    public function getHeight() {
+    public function getHeight()
+    {
         return $this->height;
     }
 
@@ -111,7 +117,8 @@ class EmbedResponse {
      *
      * @return EmbedResponse
      */
-    public function setHeight( $height ) {
+    public function setHeight($height)
+    {
         $this->height = $height;
 
         return $this;
@@ -120,7 +127,8 @@ class EmbedResponse {
     /**
      * @return mixed
      */
-    public function getDuration() {
+    public function getDuration()
+    {
         return $this->duration;
     }
 
@@ -129,7 +137,8 @@ class EmbedResponse {
      *
      * @return EmbedResponse
      */
-    public function setDuration( $duration ) {
+    public function setDuration($duration)
+    {
         $this->duration = $duration;
 
         return $this;
@@ -138,7 +147,8 @@ class EmbedResponse {
     /**
      * @return mixed
      */
-    public function getTitle() {
+    public function getTitle()
+    {
         return $this->title;
     }
 
@@ -147,7 +157,8 @@ class EmbedResponse {
      *
      * @return EmbedResponse
      */
-    public function setTitle( $title ) {
+    public function setTitle($title)
+    {
         $this->title = $title;
 
         return $this;
@@ -156,7 +167,8 @@ class EmbedResponse {
     /**
      * @return mixed
      */
-    public function getDescription() {
+    public function getDescription()
+    {
         return $this->description;
     }
 
@@ -165,7 +177,8 @@ class EmbedResponse {
      *
      * @return EmbedResponse
      */
-    public function setDescription( $description ) {
+    public function setDescription($description)
+    {
         $this->description = $description;
 
         return $this;
@@ -174,7 +187,8 @@ class EmbedResponse {
     /**
      * @return mixed
      */
-    public function getThumbnailUrl() {
+    public function getThumbnailUrl()
+    {
         return $this->thumbnailUrl;
     }
 
@@ -183,7 +197,8 @@ class EmbedResponse {
      *
      * @return EmbedResponse
      */
-    public function setThumbnailUrl( $thumbnailUrl ) {
+    public function setThumbnailUrl($thumbnailUrl)
+    {
         $this->thumbnailUrl = $thumbnailUrl;
 
         return $this;
@@ -192,7 +207,8 @@ class EmbedResponse {
     /**
      * @return mixed
      */
-    public function getThumbnailWidth() {
+    public function getThumbnailWidth()
+    {
         return $this->thumbnailWidth;
     }
 
@@ -201,7 +217,8 @@ class EmbedResponse {
      *
      * @return EmbedResponse
      */
-    public function setThumbnailWidth( $thumbnailWidth ) {
+    public function setThumbnailWidth($thumbnailWidth)
+    {
         $this->thumbnailWidth = $thumbnailWidth;
 
         return $this;
@@ -210,7 +227,8 @@ class EmbedResponse {
     /**
      * @return mixed
      */
-    public function getThumbnailHeight() {
+    public function getThumbnailHeight()
+    {
         return $this->thumbnailHeight;
     }
 
@@ -219,7 +237,8 @@ class EmbedResponse {
      *
      * @return EmbedResponse
      */
-    public function setThumbnailHeight( $thumbnailHeight ) {
+    public function setThumbnailHeight($thumbnailHeight)
+    {
         $this->thumbnailHeight = $thumbnailHeight;
 
         return $this;
@@ -228,7 +247,8 @@ class EmbedResponse {
     /**
      * @return mixed
      */
-    public function getAuthorName() {
+    public function getAuthorName()
+    {
         return $this->authorName;
     }
 
@@ -237,7 +257,8 @@ class EmbedResponse {
      *
      * @return EmbedResponse
      */
-    public function setAuthorName( $authorName ) {
+    public function setAuthorName($authorName)
+    {
         $this->authorName = $authorName;
 
         return $this;
@@ -246,7 +267,8 @@ class EmbedResponse {
     /**
      * @return mixed
      */
-    public function getAuthorUrl() {
+    public function getAuthorUrl()
+    {
         return $this->authorUrl;
     }
 
@@ -255,7 +277,8 @@ class EmbedResponse {
      *
      * @return EmbedResponse
      */
-    public function setAuthorUrl( $authorUrl ) {
+    public function setAuthorUrl($authorUrl)
+    {
         $this->authorUrl = $authorUrl;
 
         return $this;
@@ -264,7 +287,8 @@ class EmbedResponse {
     /**
      * @return mixed
      */
-    public function getProviderName() {
+    public function getProviderName()
+    {
         return $this->providerName;
     }
 
@@ -273,7 +297,8 @@ class EmbedResponse {
      *
      * @return EmbedResponse
      */
-    public function setProviderName( $providerName ) {
+    public function setProviderName($providerName)
+    {
         $this->providerName = $providerName;
 
         return $this;
@@ -282,7 +307,8 @@ class EmbedResponse {
     /**
      * @return mixed
      */
-    public function getProviderUrl() {
+    public function getProviderUrl()
+    {
         return $this->providerUrl;
     }
 
@@ -291,7 +317,8 @@ class EmbedResponse {
      *
      * @return EmbedResponse
      */
-    public function setProviderUrl( $providerUrl ) {
+    public function setProviderUrl($providerUrl)
+    {
         $this->providerUrl = $providerUrl;
 
         return $this;
@@ -300,7 +327,8 @@ class EmbedResponse {
     /**
      * @return mixed
      */
-    public function getRawResponse() {
+    public function getRawResponse()
+    {
         return $this->rawResponse;
     }
 
@@ -309,7 +337,8 @@ class EmbedResponse {
      *
      * @return EmbedResponse
      */
-    public function setRawResponse( $rawResponse ) {
+    public function setRawResponse($rawResponse)
+    {
         $this->rawResponse = $rawResponse;
 
         return $this;

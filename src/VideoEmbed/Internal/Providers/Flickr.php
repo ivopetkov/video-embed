@@ -12,13 +12,15 @@ namespace IvoPetkov\VideoEmbed\Internal\Providers;
 use IvoPetkov\VideoEmbed\Internal\Provider;
 use IvoPetkov\VideoEmbed\Internal\ProviderInterface;
 
-final class Flickr extends Provider implements ProviderInterface {
+final class Flickr extends Provider implements ProviderInterface
+{
 
-    public function load( $url ) {
-        $response = $this->readUrl( 'http://www.flickr.com/services/oembed?url=' . urlencode( $url ) . '&format=json' );
+    public function load($url)
+    {
+        $response = $this->readUrl('http://www.flickr.com/services/oembed?url=' . urlencode($url) . '&format=json');
 
-        $data     = $this->parseResponse( $response );
-        $response = $this->buildResponse( $data )->setRawResponse( $response );
+        $data     = $this->parseResponse($response);
+        $response = $this->buildResponse($data)->setRawResponse($response);
 
         return $response;
     }
@@ -28,7 +30,8 @@ final class Flickr extends Provider implements ProviderInterface {
      *
      * @return array
      */
-    public static function getRegisteredHostnames() {
-        return [ 'flickr.com', '*.flickr.com', 'flic.kr' ];
+    public static function getRegisteredHostnames()
+    {
+        return ['flickr.com', '*.flickr.com', 'flic.kr'];
     }
 }
