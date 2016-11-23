@@ -31,8 +31,8 @@ final class Vbox7 extends Provider implements ProviderInterface {
     }
 
 
-    protected function parseResponse( $raw_response ) {
-        $properties_names = [
+    protected function parseResponse( $rawResponse ) {
+        $propertiesNames = [
             'title',
             'author_name',
             'author_url',
@@ -47,16 +47,16 @@ final class Vbox7 extends Provider implements ProviderInterface {
         ];
 
         $domDocument = new \DOMDocument();
-        $domDocument->loadXML( $raw_response );
+        $domDocument->loadXML( $rawResponse );
         if ( $domDocument->childNodes->item( 0 )->nodeName !== 'oembed' ) {
             throw new  \RuntimeException( 'Failed to parse resposne' );
         }
 
         $properties = [];
-        foreach ( $properties_names as $property_name ) {
-            $elements = $domDocument->getElementsByTagName( $property_name );
+        foreach ( $propertiesNames as $propertyName ) {
+            $elements = $domDocument->getElementsByTagName( $propertyName );
             if ( $elements->length === 1 ) {
-                $properties[ $property_name ] = trim( (string) $elements->item( 0 )->textContent );
+                $properties[ $propertyName ] = trim( (string) $elements->item( 0 )->textContent );
             }
         }
 

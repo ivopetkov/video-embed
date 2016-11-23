@@ -35,15 +35,15 @@ class ProviderRepository {
     }
 
     /**
-     * @param string $video_url
+     * @param string $videoUrl
      *
      * @return ProviderInterface
      * @throws \Exception
      *
      */
-    public static function find( $video_url ) {
+    public static function find( $videoUrl ) {
 
-        $hostname = self::getHostname( $video_url );
+        $hostname = self::getHostname( $videoUrl );
 
         /** @var ProviderInterface $provider */
         foreach ( self::$providers as $provider ) {
@@ -58,13 +58,13 @@ class ProviderRepository {
 
     }
 
-    protected static function matchDomain( $hostname, $provider_hostnames ) {
-        $provider_hostnames = array_map( function ( $domain ) {
+    protected static function matchDomain( $hostname, $providerHostnames ) {
+        $providerHostnames = array_map( function ( $domain ) {
             return str_replace( [ '.', '*' ], [ '\.', '.*' ], $domain );
-        }, $provider_hostnames );
+        }, $providerHostnames );
 
 
-        if ( preg_match( '/^(' . implode( '|', $provider_hostnames ) . ')$/', $hostname ) ) {
+        if ( preg_match( '/^(' . implode( '|', $providerHostnames ) . ')$/', $hostname ) ) {
             return true;
         }
 

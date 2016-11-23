@@ -36,8 +36,8 @@ class Provider {
     }
 
 
-    protected function parseResponse( $raw_response ) {
-        $response = json_decode( $raw_response, true );
+    protected function parseResponse( $rawResponse ) {
+        $response = json_decode( $rawResponse, true );
 
         if ( ! $response ) {
             throw new  \RuntimeException( 'Failed to parse resposne' );
