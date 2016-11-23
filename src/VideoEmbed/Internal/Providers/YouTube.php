@@ -9,27 +9,29 @@
 
 namespace IvoPetkov\VideoEmbed\Internal\Providers;
 
-final class YouTube extends \IvoPetkov\VideoEmbed\Internal\Provider
+use IvoPetkov\VideoEmbed\Internal\Provider;
+use IvoPetkov\VideoEmbed\Internal\ProviderInterface;
+
+final class YouTube extends Provider implements ProviderInterface
 {
 
-    static function load($url, $result)
+    public function load($url)
     {
-        $response = parent::readUrl('https://www.youtube.com/oembed?url=' . urlencode($url) . '&format=json');
-        $result->rawResponse = $response;
-        $data = json_decode($response, true);
-        if (is_array($data)) {
-            $result->html = parent::getStringValueOrNull($data, 'html');
-            $result->width = parent::getIntValueOrNull($data, 'width');
-            $result->height = parent::getIntValueOrNull($data, 'height');
-            $result->title = parent::getStringValueOrNull($data, 'title');
-            $result->thumbnail['url'] = parent::getStringValueOrNull($data, 'thumbnail_url');
-            $result->thumbnail['width'] = parent::getIntValueOrNull($data, 'thumbnail_width');
-            $result->thumbnail['height'] = parent::getIntValueOrNull($data, 'thumbnail_height');
-            $result->author['name'] = parent::getStringValueOrNull($data, 'author_name');
-            $result->author['url'] = parent::getStringValueOrNull($data, 'author_url');
-            $result->provider['name'] = parent::getStringValueOrNull($data, 'provider_name');
-            $result->provider['url'] = parent::getStringValueOrNull($data, 'provider_url');
-        }
+        $response = $this->readUrl('https://www.youtube.com/oembed?url=' . urlencode($url) . '&format=json');
+
+        $data     = $this->parseResponse($response);
+        $response = $this->buildResponse($data)->setRawResponse($response);
+
+        return $response;
     }
 
+    /**
+     * Get all urls registered by provider
+     *
+     * @return array
+     */
+    public static function getRegisteredHostnames()
+    {
+        return ['youtube.com', 'youtu.be'];
+    }
 }
