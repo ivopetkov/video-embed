@@ -199,8 +199,8 @@ class VideoEmbed
         }
         $this->html = preg_replace("/ width([ ]?)=([ ]?)[\"\']([0-9\.]+)[\"\']/", " width=\"" . $width . "\"", $this->html);
         $this->html = preg_replace("/ height([ ]?)=([ ]?)[\"\']([0-9\.]+)[\"\']/", " height=\"" . $height . "\"", $this->html);
-        $this->html = preg_replace("/width:([0-9\.]+)px/", "width:" . (is_numeric($width) ? $width . 'px' : '') . "", $this->html);
-        $this->html = preg_replace("/height:([0-9\.]+)px/", "height:" . (is_numeric($height) ? $height . 'px' : '') . "", $this->html);
+        $this->html = preg_replace("/width:([0-9\.]+)px/", "width:" . (is_numeric($width) ? $width . 'px' : $width) . "", $this->html);
+        $this->html = preg_replace("/height:([0-9\.]+)px/", "height:" . (is_numeric($height) ? $height . 'px' : $height) . "", $this->html);
         $this->html = preg_replace("/ width([ ]?)=([ ]?)([0-9\.]+)/", " width=" . $width, $this->html);
         $this->html = preg_replace("/ height([ ]?)=([ ]?)([0-9\.]+)/", " height=" . $height, $this->html);
         $this->width = $width;
