@@ -14,6 +14,9 @@ final class Vbox7 extends \IvoPetkov\VideoEmbed\Internal\Provider
 
     static function load($url, $result)
     {
+        if (strpos($url, 'play:') !== false && strpos($url, '&') !== false) {
+            $url = substr($url, 0, strpos($url, '&'));
+        }
         $response = parent::readUrl('http://www.vbox7.com/etc/oembed/?url=' . urlencode($url));
         $result->rawResponse = $response;
         $domDocument = new \DOMDocument();
@@ -37,7 +40,13 @@ final class Vbox7 extends \IvoPetkov\VideoEmbed\Internal\Provider
             $urlParts = explode('play:', $properties['url']);
             if (isset($urlParts[1])) {
                 $result->width = parent::getIntValueOrNull($properties, 'width');
+                if (strlen($result->width) === 0) {
+                    $result->width = 560;
+                }
                 $result->height = parent::getIntValueOrNull($properties, 'height');
+                if (strlen($result->height) === 0) {
+                    $result->height = 319;
+                }
                 $result->html = '<iframe src="https://www.vbox7.com/emb/external.php?vid=' . $urlParts[1] . '" frameborder="0" allowfullscreen style="width:' . $result->width . 'px;height:' . $result->height . 'px;"></iframe>';
                 $result->title = parent::getStringValueOrNull($properties, 'title');
                 $result->thumbnail['url'] = parent::getStringValueOrNull($properties, 'thumbnail_url');
