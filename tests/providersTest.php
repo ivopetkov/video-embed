@@ -28,13 +28,13 @@ class ProvidersTest extends VideoEmbedTestCase
     /**
      * 
      */
-    public function testDailymotion()
+    public function testDailyMotion()
     {
         $videoEmbed = new IvoPetkov\VideoEmbed('http://www.dailymotion.com/video/x4cdcq4_temps-forts-nadal-v-groth-roland-garros-2016-1t_sport');
         $this->assertTrue($videoEmbed->url === 'http://www.dailymotion.com/video/x4cdcq4_temps-forts-nadal-v-groth-roland-garros-2016-1t_sport');
         $this->assertTrue($videoEmbed->title === 'Temps forts Nadal v Groth Roland-Garros 2016 / 1T');
         $videoEmbed->setSize(800, 600);
-        $this->assertTrue($videoEmbed->html === '<iframe frameborder="0" width="800" height="600" src="http://www.dailymotion.com/embed/video/x4cdcq4" allowfullscreen></iframe>');
+        $this->assertTrue($videoEmbed->html === '<iframe frameborder="0" width="800" height="600" src="https://www.dailymotion.com/embed/video/x4cdcq4" allowfullscreen allow="autoplay"></iframe>');
     }
 
     /**
@@ -42,11 +42,11 @@ class ProvidersTest extends VideoEmbedTestCase
      */
     public function testFacebook()
     {
-        $videoEmbed = new IvoPetkov\VideoEmbed('https://www.facebook.com/SpaceX/videos/10157486010400131/');
-        $this->assertTrue($videoEmbed->url === 'https://www.facebook.com/SpaceX/videos/10157486010400131/');
+        $videoEmbed = new IvoPetkov\VideoEmbed('https://www.facebook.com/facebook/videos/10155479830046729/');
+        $this->assertTrue($videoEmbed->url === 'https://www.facebook.com/facebook/videos/10155479830046729/');
         $this->assertTrue($videoEmbed->title === null);
         $videoEmbed->setSize(800, 600);
-        $this->assertTrue($videoEmbed->html === '<iframe src="https://www.facebook.com/video/embed?video_id=10157486010400131" width="800" height="600" frameborder="0"></iframe>');
+        $this->assertTrue($videoEmbed->html === '<iframe src="https://www.facebook.com/video/embed?video_id=10155479830046729" width="800" height="600" frameborder="0"></iframe>');
     }
 
     /**
@@ -82,7 +82,7 @@ class ProvidersTest extends VideoEmbedTestCase
         $this->assertTrue($videoEmbed->url === 'http://www.hulu.com/watch/20807/late-night-with-conan-obrien-wed-may-21-2008');
         $this->assertTrue($videoEmbed->title === 'Wed, May 21, 2008 (Late Night With Conan O\'Brien)');
         $videoEmbed->setSize(800, 600);
-        $this->assertTrue($videoEmbed->html === '<iframe width="800" height="600" src="http://www.hulu.com/embed.html?eid=0-njKp22bl4GivFXH0lh5w" frameborder="0" scrolling="no" webkitAllowFullScreen mozallowfullscreen allowfullscreen> </iframe>');
+        $this->assertTrue($videoEmbed->html === '<iframe width="800" height="600" src="//www.hulu.com/embed.html?eid=0-njKp22bl4GivFXH0lh5w" frameborder="0" scrolling="no" webkitAllowFullScreen mozallowfullscreen allowfullscreen> </iframe>');
     }
 
     /**
@@ -94,7 +94,7 @@ class ProvidersTest extends VideoEmbedTestCase
         $this->assertTrue($videoEmbed->url === 'https://www.kickstarter.com/projects/8220280/kello-the-sleep-revolution-device-that-upgrades-yo');
         $this->assertTrue($videoEmbed->title === 'Kello: The Sleep Revolution Device That Upgrades Your Day');
         $videoEmbed->setSize(800, 600);
-        $this->assertTrue($videoEmbed->html === '<iframe frameborder="0" height="600" scrolling="no" src="https://www.kickstarter.com/projects/8220280/kello-the-sleep-revolution-device-that-upgrades-yo/widget/video.html" width="800"></iframe>');
+        $this->assertTrue($videoEmbed->html === '<iframe src="https://www.kickstarter.com/projects/8220280/kello-the-sleep-revolution-device-that-upgrades-yo/widget/video.html" height="600" width="800" frameborder="0" scrolling="no"></iframe>');
     }
 
     /**
@@ -124,18 +124,6 @@ class ProvidersTest extends VideoEmbedTestCase
     /**
      * 
      */
-    public function testUstream()
-    {
-        $videoEmbed = new IvoPetkov\VideoEmbed('http://www.ustream.tv/recorded/91509675');
-        $this->assertTrue($videoEmbed->url === 'http://www.ustream.tv/recorded/91509675');
-        $this->assertTrue($videoEmbed->title === 'Autorecord from 20/09/2016 4:15PM EDT');
-        $videoEmbed->setSize(800, 600);
-        $this->assertTrue($videoEmbed->html === '<iframe width="800" height="600" src="http://www.ustream.tv/embed/recorded/91509675" scrolling="no" frameborder="0" style="border: 0px none transparent;"></iframe><br />');
-    }
-
-    /**
-     * 
-     */
     public function testVbox7()
     {
         $videoEmbed = new IvoPetkov\VideoEmbed('http://www.vbox7.com/play:4bd8b90e');
@@ -154,7 +142,7 @@ class ProvidersTest extends VideoEmbedTestCase
         $this->assertTrue($videoEmbed->url === 'https://vimeo.com/29950141');
         $this->assertTrue($videoEmbed->title === 'Landscapes: Volume Two');
         $videoEmbed->setSize(800, 600);
-        $this->assertTrue($videoEmbed->html === '<iframe src="https://player.vimeo.com/video/29950141" width="800" height="600" frameborder="0" title="Landscapes: Volume Two" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
+        $this->assertTrue($videoEmbed->html === '<iframe src="https://player.vimeo.com/video/29950141?app_id=122963" width="800" height="600" frameborder="0" title="Landscapes: Volume Two" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
     }
 
     /**
@@ -179,7 +167,7 @@ class ProvidersTest extends VideoEmbedTestCase
         $this->assertTrue($videoEmbed->url === 'https://www.youtube.com/watch?v=Pwe-pA6TaZk');
         $this->assertTrue($videoEmbed->title === 'Where the Hell is Matt? 2012');
         $videoEmbed->setSize(800, 600);
-        $this->assertTrue($videoEmbed->html === '<iframe width="800" height="600" src="https://www.youtube.com/embed/Pwe-pA6TaZk?feature=oembed" frameborder="0" allowfullscreen></iframe>');
+        $this->assertTrue($videoEmbed->html === '<iframe width="800" height="600" src="https://www.youtube.com/embed/Pwe-pA6TaZk?feature=oembed" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>');
     }
 
     /**

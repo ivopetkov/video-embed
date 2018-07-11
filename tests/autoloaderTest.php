@@ -29,7 +29,6 @@ class AutoloaderTest extends VideoEmbedAutoloaderTestCase
         $this->assertTrue(class_exists('IvoPetkov\VideoEmbed\Internal\Providers\Kickstarter'));
         $this->assertTrue(class_exists('IvoPetkov\VideoEmbed\Internal\Providers\NYTimes'));
         $this->assertTrue(class_exists('IvoPetkov\VideoEmbed\Internal\Providers\Ted'));
-        $this->assertTrue(class_exists('IvoPetkov\VideoEmbed\Internal\Providers\Ustream'));
         $this->assertTrue(class_exists('IvoPetkov\VideoEmbed\Internal\Providers\Vbox7'));
         $this->assertTrue(class_exists('IvoPetkov\VideoEmbed\Internal\Providers\Vimeo'));
         $this->assertTrue(class_exists('IvoPetkov\VideoEmbed\Internal\Providers\Vine'));

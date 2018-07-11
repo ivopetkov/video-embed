@@ -109,7 +109,6 @@ class VideoEmbed
         'Kickstarter' => ['kickstarter.com'],
         'NYTimes' => ['nytimes.com'],
         'Ted' => ['ted.com'],
-        'Ustream' => ['ustream.com', 'ustream.tv', '*.ustream.tv'],
         'Vbox7' => ['vbox7.com', '*.vbox7.com'],
         'Vimeo' => ['vimeo.com', 'player.vimeo.com'],
         'Vine' => ['vine.co'],

@@ -19,7 +19,6 @@ $classes = array(
     'IvoPetkov\VideoEmbed\Internal\Providers\Kickstarter' => 'src/VideoEmbed/Internal/Providers/Kickstarter.php',
     'IvoPetkov\VideoEmbed\Internal\Providers\NYTimes' => 'src/VideoEmbed/Internal/Providers/NYTimes.php',
     'IvoPetkov\VideoEmbed\Internal\Providers\Ted' => 'src/VideoEmbed/Internal/Providers/Ted.php',
-    'IvoPetkov\VideoEmbed\Internal\Providers\Ustream' => 'src/VideoEmbed/Internal/Providers/Ustream.php',
     'IvoPetkov\VideoEmbed\Internal\Providers\Vbox7' => 'src/VideoEmbed/Internal/Providers/Vbox7.php',
     'IvoPetkov\VideoEmbed\Internal\Providers\Vimeo' => 'src/VideoEmbed/Internal/Providers/Vimeo.php',
     'IvoPetkov\VideoEmbed\Internal\Providers\Vine' => 'src/VideoEmbed/Internal/Providers/Vine.php',
