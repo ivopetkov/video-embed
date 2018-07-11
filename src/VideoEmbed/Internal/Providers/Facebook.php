@@ -3,7 +3,7 @@
 /*
  * Video embed
  * https://github.com/ivopetkov/video-embed
- * Copyright 2016, Ivo Petkov
+ * Copyright (c) Ivo Petkov
  * Free to use under the MIT license.
  */
 
