@@ -7,16 +7,14 @@
          beStrictAboutOutputDuringTests="true"
          stopOnFailure="true">
     <testsuites>
-        <testsuite>
+        <testsuite name="">
             <directory>./tests/</directory>
         </testsuite>
     </testsuites>
     <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
+        <whitelist>
             <directory>./src/</directory>
+            <file>./index.php</file>
         </whitelist>
     </filter>
-    <php>
-        <ini name="date.timezone" value="UTC"/>
-    </php>
 </phpunit>

@@ -10,7 +10,7 @@
 /**
  * @runTestsInSeparateProcesses
  */
-class ProvidersTest extends VideoEmbedTestCase
+class ProvidersTest extends PHPUnit\Framework\TestCase
 {
 
     /**
@@ -175,7 +175,7 @@ class ProvidersTest extends VideoEmbedTestCase
      */
     public function testInvalidProvider1()
     {
-        $this->setExpectedException('\Exception');
+        $this->expectException('\Exception');
         new IvoPetkov\VideoEmbed('https://example.com/');
     }
 
@@ -184,7 +184,7 @@ class ProvidersTest extends VideoEmbedTestCase
      */
     public function testInvalidProvider2()
     {
-        $this->setExpectedException('\Exception');
+        $this->expectException('\Exception');
         new IvoPetkov\VideoEmbed('http://invalid/');
     }
 
