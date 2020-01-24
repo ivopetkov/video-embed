@@ -23,7 +23,7 @@ final class Vbox7 extends \IvoPetkov\VideoEmbed\Internal\Provider
         $domDocument->loadXML($response);
         if ($domDocument->childNodes->item(0)->nodeName === 'oembed') {
             $properties = [];
-            $findProperty = function($name) use ($domDocument, &$properties) {
+            $findProperty = function ($name) use ($domDocument, &$properties) {
                 $elements = $domDocument->getElementsByTagName($name);
                 if ($elements->length === 1) {
                     $properties[$name] = trim((string) $elements->item(0)->textContent);
@@ -59,5 +59,4 @@ final class Vbox7 extends \IvoPetkov\VideoEmbed\Internal\Provider
             }
         }
     }
-
 }
