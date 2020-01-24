@@ -176,7 +176,7 @@ class VideoEmbed
 
         restore_error_handler();
         if ($this->html === null) {
-            throw new \Exception('Cannot retrieve information about ' . $this->url . ' (reason: ' . (isset($errorReason{0}) ? $errorReason : 'unknown') . ')');
+            throw new \Exception('Cannot retrieve information about ' . $this->url . ' (reason: ' . (isset($errorReason[0]) ? $errorReason : 'unknown') . ')');
         }
     }
 
