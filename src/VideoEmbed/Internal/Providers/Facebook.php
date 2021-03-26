@@ -12,14 +12,21 @@ namespace IvoPetkov\VideoEmbed\Internal\Providers;
 final class Facebook extends \IvoPetkov\VideoEmbed\Internal\Provider
 {
 
-    static function load($url, $result)
+    static function load($url, $result, $config)
     {
-        $response = parent::readUrl('https://www.facebook.com/plugins/video/oembed.json/?url=' . urlencode($url));
+        if (!isset($config['facebookAppID'])) {
+            throw new \Exception('The facebookAppID config option is missing!');
+        }
+        if (!isset($config['facebookAppSecret'])) {
+            throw new \Exception('The facebookAppSecret config option is missing!');
+        }
+        $response = parent::readUrl('https://graph.facebook.com/v10.0/oembed_video?url=' . urlencode($url) . '&access_token=' . $config['facebookAppID'] . '|' . $config['facebookAppSecret']);
         $result->rawResponse = $response;
         $data = json_decode($response, true);
-        if (is_array($data)) {
-            $urlParts = explode('/', trim($url, '/'));
-            $videoID = $urlParts[sizeof($urlParts) - 1];
+        if (is_array($data) && isset($data['html'])) {
+            $matches = null;
+            preg_match('/\/videos\/([0-9]+)\//', $data['html'], $matches);
+            $videoID = isset($matches[1]) ? $matches[1] : null;
             if (is_numeric($videoID)) {
                 $result->width = parent::getIntValueOrNull($data, 'width');
                 $result->height = parent::getIntValueOrNull($data, 'height');
@@ -37,5 +44,4 @@ final class Facebook extends \IvoPetkov\VideoEmbed\Internal\Provider
             }
         }
     }
-
 }

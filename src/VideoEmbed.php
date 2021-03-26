@@ -102,7 +102,7 @@ class VideoEmbed
     static private $providers = [
         'CollegeHumor' => ['collegehumor.com'],
         'Dailymotion' => ['dailymotion.com'],
-        'Facebook' => ['facebook.com'],
+        'Facebook' => ['facebook.com', 'fb.watch'],
         'Flickr' => ['flickr.com', '*.flickr.com', 'flic.kr'],
         'FunnyOrDie' => ['funnyordie.com'],
         'Hulu' => ['hulu.com'],
@@ -119,11 +119,12 @@ class VideoEmbed
      * Creates a new VideoEmbed object and load it if an url is specified
      * 
      * @param string $url The video url
+     * @param array $config Configuration options. Currently supported: facebookAppID and facebookAppSecret
      */
-    public function __construct($url = null)
+    public function __construct($url = null, $config = [])
     {
         if ($url !== null) {
-            $this->load($url);
+            $this->load($url, $config);
         }
     }
 
@@ -131,19 +132,23 @@ class VideoEmbed
      * Loads the data for the url specified
      * 
      * @param string $url The video url
+     * @param array $config Configuration options. Currently supported: facebookAppID and facebookAppSecret
      * @throws \Exception
      * @throws \InvalidArgumentException
      * @return void No value is returned
      */
-    public function load($url)
+    public function load($url, $config = [])
     {
         if (!is_string($url)) {
             throw new \InvalidArgumentException('The url argument must be of type string');
         }
+        if (!is_array($config)) {
+            throw new \InvalidArgumentException('The config argument must be of type array');
+        }
         $this->url = $url;
 
         // Converts PHP errors and warnings to Exceptions
-        set_error_handler(function() {
+        set_error_handler(function () {
             throw new \Exception(func_get_arg(1));
         });
 
@@ -160,7 +165,7 @@ class VideoEmbed
                     foreach ($domains as $domain) {
                         if (preg_match('/^' . str_replace(['.', '*'], ['\.', '.*'], $domain) . '$/', $hostname)) {
                             include_once __DIR__ . DIRECTORY_SEPARATOR . 'VideoEmbed' . DIRECTORY_SEPARATOR . 'Internal' . DIRECTORY_SEPARATOR . 'Providers' . DIRECTORY_SEPARATOR . $name . '.php';
-                            call_user_func(['\IvoPetkov\VideoEmbed\Internal\Providers\\' . $name, 'load'], $this->url, $this);
+                            call_user_func(['\IvoPetkov\VideoEmbed\Internal\Providers\\' . $name, 'load'], $this->url, $this, $config);
                             $done = true;
                             break;
                         }
@@ -205,5 +210,4 @@ class VideoEmbed
         $this->width = $width;
         $this->height = $height;
     }
-
 }
