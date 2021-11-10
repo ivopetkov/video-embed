@@ -19,6 +19,9 @@ final class Flickr extends \IvoPetkov\VideoEmbed\Internal\Provider
         $data = json_decode($response, true);
         if (is_array($data)) {
             $result->html = parent::getStringValueOrNull($data, 'html');
+            if ($result->html !== null) {
+                $result->html = preg_replace('/>\s*?</', '><', $result->html);
+            }
             $result->width = parent::getIntValueOrNull($data, 'width');
             $result->height = parent::getIntValueOrNull($data, 'height');
             $result->duration = parent::getIntValueOrNull($data, 'duration');
@@ -33,5 +36,4 @@ final class Flickr extends \IvoPetkov\VideoEmbed\Internal\Provider
             $result->provider['url'] = parent::getStringValueOrNull($data, 'provider_url');
         }
     }
-
 }
