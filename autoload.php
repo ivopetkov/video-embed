@@ -10,11 +10,11 @@
 $classes = array(
     'IvoPetkov\VideoEmbed' => 'src/VideoEmbed.php',
     'IvoPetkov\VideoEmbed\Internal\Provider' => 'src/VideoEmbed/Internal/Provider.php',
-    'IvoPetkov\VideoEmbed\Internal\Providers\CollegeHumor' => 'src/VideoEmbed/Internal/Providers/CollegeHumor.php',
+    //'IvoPetkov\VideoEmbed\Internal\Providers\CollegeHumor' => 'src/VideoEmbed/Internal/Providers/CollegeHumor.php',
     'IvoPetkov\VideoEmbed\Internal\Providers\Dailymotion' => 'src/VideoEmbed/Internal/Providers/Dailymotion.php',
     'IvoPetkov\VideoEmbed\Internal\Providers\Facebook' => 'src/VideoEmbed/Internal/Providers/Facebook.php',
     'IvoPetkov\VideoEmbed\Internal\Providers\Flickr' => 'src/VideoEmbed/Internal/Providers/Flickr.php',
-    'IvoPetkov\VideoEmbed\Internal\Providers\FunnyOrDie' => 'src/VideoEmbed/Internal/Providers/FunnyOrDie.php',
+    //'IvoPetkov\VideoEmbed\Internal\Providers\FunnyOrDie' => 'src/VideoEmbed/Internal/Providers/FunnyOrDie.php',
     'IvoPetkov\VideoEmbed\Internal\Providers\Hulu' => 'src/VideoEmbed/Internal/Providers/Hulu.php',
     'IvoPetkov\VideoEmbed\Internal\Providers\Kickstarter' => 'src/VideoEmbed/Internal/Providers/Kickstarter.php',
     'IvoPetkov\VideoEmbed\Internal\Providers\NYTimes' => 'src/VideoEmbed/Internal/Providers/NYTimes.php',

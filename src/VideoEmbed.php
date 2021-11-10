@@ -100,11 +100,11 @@ class VideoEmbed
      * @var array
      */
     static private $providers = [
-        'CollegeHumor' => ['collegehumor.com'],
+        //'CollegeHumor' => ['collegehumor.com'],
         'Dailymotion' => ['dailymotion.com'],
         'Facebook' => ['facebook.com', 'fb.watch'],
         'Flickr' => ['flickr.com', '*.flickr.com', 'flic.kr'],
-        'FunnyOrDie' => ['funnyordie.com'],
+        //'FunnyOrDie' => ['funnyordie.com'],
         'Hulu' => ['hulu.com'],
         'Kickstarter' => ['kickstarter.com'],
         'NYTimes' => ['nytimes.com'],
