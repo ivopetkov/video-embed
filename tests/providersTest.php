@@ -54,6 +54,15 @@ class ProvidersTest extends PHPUnit\Framework\TestCase
     /**
      * 
      */
+    public function testInstagram()
+    {
+        // this test requires a configuration (facebookAppID and facebookAppSecret)
+        $this->assertTrue(true);
+    }
+
+    /**
+     * 
+     */
     public function testFlickr()
     {
         $videoEmbed = new IvoPetkov\VideoEmbed('https://www.flickr.com/photos/udono/3343551781/');

@@ -103,6 +103,7 @@ class VideoEmbed
         //'CollegeHumor' => ['collegehumor.com'],
         'Dailymotion' => ['dailymotion.com'],
         'Facebook' => ['facebook.com', 'fb.watch'],
+        'Instagram' => ['instagram.com'],
         'Flickr' => ['flickr.com', '*.flickr.com', 'flic.kr'],
         //'FunnyOrDie' => ['funnyordie.com'],
         'Hulu' => ['hulu.com'],
