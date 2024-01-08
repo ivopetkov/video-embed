@@ -20,7 +20,7 @@ final class Instagram extends \IvoPetkov\VideoEmbed\Internal\Provider
         if (!isset($config['facebookAppSecret'])) {
             throw new \Exception('The facebookAppSecret config option is missing!');
         }
-        $response = parent::readUrl('https://graph.facebook.com/v10.0/instagram_oembed?url=' . urlencode($url) . '&access_token=' . $config['facebookAppID'] . '|' . $config['facebookAppSecret']);
+        $response = parent::readUrl('https://graph.facebook.com/v18.0/instagram_oembed?url=' . urlencode($url) . '&access_token=' . $config['facebookAppID'] . '|' . $config['facebookAppSecret']);
         $result->rawResponse = $response;
         $data = json_decode($response, true);
         if (is_array($data) && isset($data['html'])) {
