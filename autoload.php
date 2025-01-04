@@ -25,7 +25,7 @@ $classes = array(
     'IvoPetkov\VideoEmbed\Internal\Providers\YouTube' => 'src/VideoEmbed/Internal/Providers/YouTube.php'
 );
 
-spl_autoload_register(function ($class) use ($classes) {
+spl_autoload_register(function ($class) use ($classes): void {
     if (isset($classes[$class])) {
         require __DIR__ . '/' . $classes[$class];
     }

@@ -149,7 +149,7 @@ class VideoEmbed
         $this->url = $url;
 
         // Converts PHP errors and warnings to Exceptions
-        set_error_handler(function () {
+        set_error_handler(function (): void {
             throw new \Exception(func_get_arg(1));
         });
 

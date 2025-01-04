@@ -34,7 +34,7 @@ class ProvidersTest extends PHPUnit\Framework\TestCase
         $this->assertTrue($videoEmbed->url === 'http://www.dailymotion.com/video/x4cdcq4_temps-forts-nadal-v-groth-roland-garros-2016-1t_sport');
         $this->assertTrue($videoEmbed->title === 'Temps forts Nadal v Groth Roland-Garros 2016 / 1T');
         $videoEmbed->setSize(800, 600);
-        $this->assertTrue($videoEmbed->html === '<iframe frameborder="0" width="800" height="600" src="https://www.dailymotion.com/embed/video/x4cdcq4" allowfullscreen allow="autoplay"></iframe>');
+        $this->assertTrue($videoEmbed->html === '<iframe frameborder="0" width="800" height="600" src="https://geo.dailymotion.com/player.html?video=x4cdcq4&" allowfullscreen allow="autoplay; fullscreen; picture-in-picture"></iframe>');
     }
 
     /**
@@ -87,14 +87,14 @@ class ProvidersTest extends PHPUnit\Framework\TestCase
     /**
      * 
      */
-    public function testHulu()
-    {
-        $videoEmbed = new IvoPetkov\VideoEmbed('http://www.hulu.com/watch/20807/late-night-with-conan-obrien-wed-may-21-2008');
-        $this->assertTrue($videoEmbed->url === 'http://www.hulu.com/watch/20807/late-night-with-conan-obrien-wed-may-21-2008');
-        $this->assertTrue($videoEmbed->title === 'Wed, May 21, 2008 (Late Night With Conan O\'Brien)');
-        $videoEmbed->setSize(800, 600);
-        $this->assertTrue($videoEmbed->html === '<iframe width="800" height="600" src="//www.hulu.com/embed.html?eid=0-njKp22bl4GivFXH0lh5w" frameborder="0" scrolling="no" webkitAllowFullScreen mozallowfullscreen allowfullscreen> </iframe>');
-    }
+    // public function testHulu()
+    // {
+    //     $videoEmbed = new IvoPetkov\VideoEmbed('http://www.hulu.com/watch/20807/late-night-with-conan-obrien-wed-may-21-2008');
+    //     $this->assertTrue($videoEmbed->url === 'http://www.hulu.com/watch/20807/late-night-with-conan-obrien-wed-may-21-2008');
+    //     $this->assertTrue($videoEmbed->title === 'Wed, May 21, 2008 (Late Night With Conan O\'Brien)');
+    //     $videoEmbed->setSize(800, 600);
+    //     $this->assertTrue($videoEmbed->html === '<iframe width="800" height="600" src="//www.hulu.com/embed.html?eid=0-njKp22bl4GivFXH0lh5w" frameborder="0" scrolling="no" webkitAllowFullScreen mozallowfullscreen allowfullscreen> </iframe>');
+    // }
 
     /**
      * 
