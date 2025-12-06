@@ -14,7 +14,7 @@ final class Ted extends \IvoPetkov\VideoEmbed\Internal\Provider
 
     static function load($url, $result)
     {
-        $response = parent::readUrl('http://www.ted.com/talks/oembed.json?url=' . urlencode($url));
+        $response = parent::readUrl('https://www.ted.com/services/v1/oembed.json?url=' . urlencode($url));
         $result->rawResponse = $response;
         $data = json_decode($response, true);
         if (is_array($data)) {

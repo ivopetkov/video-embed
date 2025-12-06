@@ -34,7 +34,7 @@ class ProvidersTest extends PHPUnit\Framework\TestCase
         $this->assertTrue($videoEmbed->url === 'http://www.dailymotion.com/video/x4cdcq4_temps-forts-nadal-v-groth-roland-garros-2016-1t_sport');
         $this->assertTrue($videoEmbed->title === 'Temps forts Nadal v Groth Roland-Garros 2016 / 1T');
         $videoEmbed->setSize(800, 600);
-        $this->assertTrue($videoEmbed->html === '<iframe frameborder="0" width="800" height="600" src="https://geo.dailymotion.com/player.html?video=x4cdcq4&" allowfullscreen allow="autoplay; fullscreen; picture-in-picture"></iframe>');
+        $this->assertTrue($videoEmbed->html === '<iframe frameborder="0" width="800" height="600" src="https://geo.dailymotion.com/player.html?video=x4cdcq4&" allowfullscreen allow="autoplay; fullscreen; picture-in-picture; web-share"></iframe>');
     }
 
     /**
@@ -115,7 +115,7 @@ class ProvidersTest extends PHPUnit\Framework\TestCase
     {
         $videoEmbed = new IvoPetkov\VideoEmbed('http://www.nytimes.com/video/technology/100000004574648/china-internet-wechat.html');
         $this->assertTrue($videoEmbed->url === 'http://www.nytimes.com/video/technology/100000004574648/china-internet-wechat.html');
-        $this->assertTrue($videoEmbed->title === 'How China Is Changing Your Internet');
+        $this->assertTrue($videoEmbed->title === 'Video: How China Is Changing Your Internet (Published 2016)');
         $videoEmbed->setSize(800, 600);
         $this->assertTrue($videoEmbed->html === '<iframe width="800" height="600" frameborder="0" scrolling="no" allowfullscreen="true" marginheight="0" marginwidth="0" id="nyt_video_player" title="New York Times Video - Embed Player" src="https://static01.nyt.com/video/players/offsite/index.html?videoId=100000004574648"></iframe>');
     }
@@ -154,7 +154,7 @@ class ProvidersTest extends PHPUnit\Framework\TestCase
         $this->assertTrue($videoEmbed->url === 'https://vimeo.com/29950141');
         $this->assertTrue($videoEmbed->title === 'Landscapes: Volume Two');
         $videoEmbed->setSize(800, 600);
-        $this->assertTrue($videoEmbed->html === '<iframe src="https://player.vimeo.com/video/29950141?app_id=122963" width="800" height="600" frameborder="0" title="Landscapes: Volume Two" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
+        $this->assertTrue($videoEmbed->html === '<iframe src="https://player.vimeo.com/video/29950141?app_id=122963" width="800" height="600" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Landscapes: Volume Two"></iframe>');
     }
 
     /**
@@ -179,7 +179,7 @@ class ProvidersTest extends PHPUnit\Framework\TestCase
         $this->assertTrue($videoEmbed->url === 'https://www.youtube.com/watch?v=Pwe-pA6TaZk');
         $this->assertTrue($videoEmbed->title === 'Where the Hell is Matt? 2012');
         $videoEmbed->setSize(800, 600);
-        $this->assertTrue($videoEmbed->html === '<iframe width="800" height="600" src="https://www.youtube.com/embed/Pwe-pA6TaZk?feature=oembed" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>');
+        $this->assertTrue($videoEmbed->html === '<iframe width="800" height="600" src="https://www.youtube.com/embed/Pwe-pA6TaZk?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Where the Hell is Matt? 2012"></iframe>');
     }
 
     /**
