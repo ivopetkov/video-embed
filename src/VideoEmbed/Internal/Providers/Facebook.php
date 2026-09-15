@@ -20,17 +20,14 @@ final class Facebook extends \IvoPetkov\VideoEmbed\Internal\Provider
         if (!isset($config['facebookAppSecret'])) {
             throw new \Exception('The facebookAppSecret config option is missing!');
         }
-        $response = parent::readUrl('https://graph.facebook.com/v18.0/oembed_video?url=' . urlencode($url) . '&access_token=' . $config['facebookAppID'] . '|' . $config['facebookAppSecret']);
+        $response = parent::readUrl('https://graph.facebook.com/v26.0/oembed_video?url=' . urlencode($url) . '&access_token=' . $config['facebookAppID'] . '|' . $config['facebookAppSecret']);
         $result->rawResponse = $response;
         $data = json_decode($response, true);
         if (is_array($data) && isset($data['html'])) {
-            $matches = null;
-            preg_match('/\/videos\/([0-9]+)\//', $data['html'], $matches);
-            $videoID = isset($matches[1]) ? $matches[1] : null;
-            if (is_numeric($videoID)) {
+            if (strpos($data['html'], 'fb-video')) {
                 $result->width = parent::getIntValueOrNull($data, 'width');
                 $result->height = parent::getIntValueOrNull($data, 'height');
-                $result->html = '<iframe src="https://www.facebook.com/video/embed?video_id=' . $videoID . '" width="' . $result->width . '" height="' . $result->height . '" frameborder="0"></iframe>';
+                $result->html = $data['html'];
                 $result->duration = parent::getIntValueOrNull($data, 'duration');
                 $result->title = parent::getStringValueOrNull($data, 'title');
                 $result->description = parent::getStringValueOrNull($data, 'description');
